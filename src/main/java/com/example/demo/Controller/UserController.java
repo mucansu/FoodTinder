@@ -3,7 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
 import com.example.demo.Repository.MealRepository;
-import com.example.demo.UserService;
+import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +18,8 @@ private MealRepository mealRepository;
 @Autowired
 private UserService userService;
 
+
+
     @GetMapping("/")
 public String loginPage(Model model){
     User user= new User();
@@ -30,17 +32,5 @@ public String register(@ModelAttribute User user, Model model){
     model.addAttribute("user",user);
     return "home";
 }
-@GetMapping("/createProfile")
-public String createProfile(Model model){
-        Profile profile= new Profile();
-        model.addAttribute("profile", profile);
-        return "createProfile";
-}
-@PostMapping("/createProfile")
-public String createprofile(@ModelAttribute Profile profile,Model model){
-        model.addAttribute("profile",profile);
 
-        return "redirect:/createProfile";
-
-}
 }

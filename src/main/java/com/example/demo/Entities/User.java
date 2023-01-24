@@ -27,6 +27,7 @@ private List<Profile> profileList=new ArrayList<>();
 
     }
 
+
     public User(Long id, String userName, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.userName = userName;
@@ -36,6 +37,15 @@ private List<Profile> profileList=new ArrayList<>();
         this.password = password;
     }
 
+    public User(Long id, String userName, String firstName, String lastName, String email, String password, List<Profile> profileList) {
+        this.id = id;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.profileList = profileList;
+    }
 
     public Long getId() {
         return id;
@@ -85,6 +95,11 @@ private List<Profile> profileList=new ArrayList<>();
         this.password = password;
     }
 
+    public List<Profile> getProfileList() {
+        return profileList;
+    }
 
-
+    public void setProfileList(List<Profile> profileList) {
+        this.profileList = profileList;
+    }
 }
