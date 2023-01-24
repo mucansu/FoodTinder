@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Log In</h1>
+<h1>Register here</h1>
+<form action="/login" method="post" th:object="${user}">
+   userName <input name="userName" type="text" th:value="${user.userName}"> <br>
+   First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
+   last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
+   email: <input name="email" type="email" th:value="${user.email}"><br>
+   password: <input name="password" type="password" th:value="${user.password}">
+    <input type="submit">
+
+</form>
+
+<div th:if="${user.userName !=null}">
+    <h3> thank you for registering. Information provided is as fallows: </h3>
+    <ul>
+        <li th:text="${user.userName}"></li>
+        <li th:text="${user.firstName}"></li>
+        <li th:text="${user.lastName}"></li>
+        <li th:text="${user.email}"></li>
+        <li th:text="${user.password}"></li>
+
+    </ul>
+</div>
+
 </body>
 </html>
