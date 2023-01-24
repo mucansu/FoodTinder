@@ -12,9 +12,9 @@ public class UserController {
 @Autowired
 private MealRepository mealRepository;
 @Autowired
-private UserRepository userRepository;
+private UserService userService;
 
-@GetMapping("/")
+    @GetMapping("/")
 public String loginPage(Model model){
     User user= new User();
     model.addAttribute("user",user);
@@ -22,6 +22,7 @@ public String loginPage(Model model){
 }
 @PostMapping("/login")
 public String register(@ModelAttribute User user, Model model){
+    userService.addUser(user);
     model.addAttribute("user",user);
     return "login";
 }
