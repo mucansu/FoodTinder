@@ -1,15 +1,15 @@
 package com.example.demo.Entities;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
+import javax.persistence.*;
 
-//@Entity
+@Entity
 public class Profile {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
+    @ManyToOne
+    private User user;
 
     public Profile() {
     }
@@ -35,5 +35,5 @@ public class Profile {
         this.name = name;
     }
 
-    private String name;
+
 }

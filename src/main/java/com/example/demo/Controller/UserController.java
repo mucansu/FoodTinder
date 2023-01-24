@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
 import com.example.demo.Repository.MealRepository;
 import com.example.demo.UserService;
@@ -27,6 +28,19 @@ public String loginPage(Model model){
 public String register(@ModelAttribute User user, Model model){
     userService.addUser(user);
     model.addAttribute("user",user);
-    return "login";
+    return "home";
+}
+@GetMapping("/createProfile")
+public String createProfile(Model model){
+        Profile profile= new Profile();
+        model.addAttribute("profile", profile);
+        return "createProfile";
+}
+@PostMapping("/createProfile")
+public String createprofile(@ModelAttribute Profile profile,Model model){
+        model.addAttribute("profile",profile);
+
+        return "redirect:/createProfile";
+
 }
 }
