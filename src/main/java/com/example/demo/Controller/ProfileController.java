@@ -22,12 +22,15 @@ public class ProfileController {
     private UserService userService;
 
     @GetMapping("/createProfile")
-    public String createProfile(Model model){
-     //   User user = new User();
-        Profile profile= new Profile();
+    public String createProfile(Model model, @PathVariable Long id){
+        User userId = userService.findById(id);
+        Profile profile = new Profile();
+        profile.setUser(userId);
+        model.addAttribute("user", userId);
         model.addAttribute("profile", profile);
-        return "createProfile";
+        return "/createProfile";
     }
+
   /*  @PostMapping("/saveItem")
     public String saveItem (@ModelAttribute Item item){
         itemRepository.save(item); //Sparar objektet
