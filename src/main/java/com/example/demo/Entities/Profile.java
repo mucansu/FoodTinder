@@ -13,7 +13,8 @@ public class Profile {
     @ManyToOne()
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "meal_profiles", joinColumns = @JoinColumn(name = "meal_id"), inverseJoinColumns = @JoinColumn(name = "profiles_id"))
     private List<Meal> mealList = new ArrayList<>();
 
     public Profile() {
@@ -28,6 +29,13 @@ public class Profile {
         this.id = id;
         this.name = name;
         this.user = user;
+    }
+
+    public Profile(long id, String name, User user, List<Meal> mealList) {
+        this.id = id;
+        this.name = name;
+        this.user = user;
+        this.mealList = mealList;
     }
 
     public long getId() {
@@ -53,4 +61,14 @@ public class Profile {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Meal> getMealList() {
+        return mealList;
+    }
+
+    public void setMealList(List<Meal> mealList) {
+        this.mealList = mealList;
+    }
+
 }
+

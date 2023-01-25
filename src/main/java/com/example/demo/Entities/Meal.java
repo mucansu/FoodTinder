@@ -10,7 +10,7 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToMany
-    private List<Profile> profiles= new ArrayList<>();
 
+    @ManyToMany(mappedBy = "mealList")
+    private List<Profile> profiles= new ArrayList<>();
 }
