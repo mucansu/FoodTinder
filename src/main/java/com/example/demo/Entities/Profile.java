@@ -1,6 +1,8 @@
 package com.example.demo.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Profile {
@@ -10,6 +12,9 @@ public class Profile {
     private String name;
     @ManyToOne()
     private User user;
+
+    @ManyToMany
+    private List<Meal> mealList = new ArrayList<>();
 
     public Profile() {
     }
