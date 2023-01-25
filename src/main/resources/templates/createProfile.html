@@ -6,16 +6,12 @@
 </head>
 <body>
 <h1> create profile here</h1>
-<form action="/createProfile" method="post" th:object="${profile}">
-    userName <input name="name" type="text" th:field="*{name}"> <br>
-    <input type="submit">
+<form action="/saveProfile" method="post">
+    <input type="hidden" name="user" th:value="${user.id}">
+    Profile Name <input name="name" type="text"> <br>
+    <input type="submit" value="Add profile">
 </form>
 
-<div th:if="${profile.name !=null}">
-<h3> thank you for adding your profile. Information provided is as fallows: </h3>
-<ul>
-    <li th:text="${profile.name}"></li>
-</ul>
-</div>
+
 </body>
 </html>
