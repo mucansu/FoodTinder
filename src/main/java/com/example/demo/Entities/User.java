@@ -21,7 +21,8 @@ public class User {
     private String email;
     private String password;
 
-@OneToMany(cascade=CascadeType.ALL,mappedBy = "user")
+@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
+
 private List<Profile> profileList=new ArrayList<>();
     public User() {
 

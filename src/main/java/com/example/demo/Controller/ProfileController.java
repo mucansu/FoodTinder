@@ -23,22 +23,30 @@ public class ProfileController {
 
     @GetMapping("/createProfile")
     public String createProfile(Model model){
+     //   User user = new User();
         Profile profile= new Profile();
         model.addAttribute("profile", profile);
         return "createProfile";
     }
+  /*  @PostMapping("/saveItem")
+    public String saveItem (@ModelAttribute Item item){
+        itemRepository.save(item); //Sparar objektet
+        return "redirect:/room/" + item.getRoom().getId(); //Skickar tillbaka till /room/{id}
+    }*/
 
-
-    @PostMapping("/createProfile")
-    public String createprofile(@ModelAttribute Profile profile, Model model ){
+    @PostMapping("/createProfile/{id}")
+    public String createprofile(@ModelAttribute Profile profile,@PathVariable Long id, Model model ){
+        User user = userService.findById(id);
 
         profileService.addProfile(profile);
         model.addAttribute("profile",profile);
+        model.addAttribute("user",user);
 
         return "redirect:/createProfile";
-
     }
-    @GetMapping("/createProfile/{id}")
+
+    /*
+   @GetMapping("/createProfile/{id}")
     public String addUserInProfile(@PathVariable Long id, Model model){
 
             User user = userService.findById(id);
@@ -50,6 +58,8 @@ public class ProfileController {
 
             return "createProfile";
         }
+
+*/
 
     }
 

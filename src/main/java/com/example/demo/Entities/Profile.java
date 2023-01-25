@@ -5,10 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Profile {
   @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     public Profile() {
