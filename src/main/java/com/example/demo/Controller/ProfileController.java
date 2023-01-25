@@ -21,14 +21,21 @@ public class ProfileController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/createProfile")
+    @GetMapping("/createProfile/{id}")
+    String profilePage(Model model, @PathVariable Long id){
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "createProfile";
+    }
+
+    @GetMapping("/addProfile")
     public String createProfile(Model model, @PathVariable Long id){
         User userId = userService.findById(id);
         Profile profile = new Profile();
         profile.setUser(userId);
         model.addAttribute("user", userId);
         model.addAttribute("profile", profile);
-        return "/createProfile";
+        return "createProfile";
     }
 
   /*  @PostMapping("/saveItem")
@@ -37,16 +44,19 @@ public class ProfileController {
         return "redirect:/room/" + item.getRoom().getId(); //Skickar tillbaka till /room/{id}
     }*/
 
-    @PostMapping("/createProfile/{id}")
-    public String createprofile(@ModelAttribute Profile profile,@PathVariable Long id, Model model ){
-        User user = userService.findById(id);
+   /* @PostMapping("/saveItem")
+    public String saveItem (@ModelAttribute Item item){
+        itemRepository.save(item); //Sparar objektet
+        return "redirect:/room/" + item.getRoom().getId(); //Skickar tillbaka till /room/{id}
+    }*/
 
+    @PostMapping("/saveProfile")
+    public String saveProfile(@ModelAttribute Profile profile){
         profileService.addProfile(profile);
-        model.addAttribute("profile",profile);
-        model.addAttribute("user",user);
-
-        return "redirect:/createProfile";
+        return "redirect:/createProfile/" + profile.getUser().getId();
     }
+
+
 
     /*
    @GetMapping("/createProfile/{id}")

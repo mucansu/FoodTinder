@@ -8,7 +8,7 @@ public class Profile {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     private User user;
 
     public Profile() {
