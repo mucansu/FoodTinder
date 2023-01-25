@@ -11,13 +11,11 @@
     Profile Name <input name="name" type="text"> <br>
     <input type="submit" value="Add profile">
 </form>
+<table>
+ <tr th:each="profile : ${user.profileList}">
+     <span th:text="${profile.name}"></span>
+</tr>
+</table>
 
-<!--
-<div th:if="${profile.name !=null}">
-<h3> thank you for adding your profile. Information provided is as fallows: </h3>
-<ul>
-    <li th:text="${profile.name}"></li>
-</ul>
-</div>-->
 </body>
 </html>

@@ -22,7 +22,7 @@ public class User {
     private String password;
 
 @OneToMany(cascade=CascadeType.ALL, mappedBy = "user")
-private List<Profile> profileList=new ArrayList<>();
+private List<Profile> profileList = new ArrayList<>();
     public User() {
 
     }

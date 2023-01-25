@@ -21,11 +21,11 @@ public class ProfileController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/createProfile/{id}")
+    @GetMapping("/profile/{id}")
     String profilePage(Model model, @PathVariable Long id){
         User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "createProfile";
+        return "profile";
     }
 
     @GetMapping("/addProfile")
@@ -35,25 +35,12 @@ public class ProfileController {
         profile.setUser(userId);
         model.addAttribute("user", userId);
         model.addAttribute("profile", profile);
-        return "createProfile";
+        return "profile";
     }
-
-  /*  @PostMapping("/saveItem")
-    public String saveItem (@ModelAttribute Item item){
-        itemRepository.save(item); //Sparar objektet
-        return "redirect:/room/" + item.getRoom().getId(); //Skickar tillbaka till /room/{id}
-    }*/
-
-   /* @PostMapping("/saveItem")
-    public String saveItem (@ModelAttribute Item item){
-        itemRepository.save(item); //Sparar objektet
-        return "redirect:/room/" + item.getRoom().getId(); //Skickar tillbaka till /room/{id}
-    }*/
-
     @PostMapping("/saveProfile")
     public String saveProfile(@ModelAttribute Profile profile){
         profileService.addProfile(profile);
-        return "redirect:/createProfile/" + profile.getUser().getId();
+        return "redirect:/profile/" + profile.getUser().getId();
     }
 
 

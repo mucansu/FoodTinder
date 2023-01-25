@@ -30,7 +30,7 @@ public class UserController {
 	public String register(@ModelAttribute User user, Model model) {
 		userService.addUser(user);
 		model.addAttribute("user", user);
-		return "home";
+		return "profile";
 	}
 
 }
