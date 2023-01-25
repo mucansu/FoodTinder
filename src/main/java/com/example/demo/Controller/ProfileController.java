@@ -42,25 +42,19 @@ public class ProfileController {
         profileService.addProfile(profile);
         return "redirect:/profile/" + profile.getUser().getId();
     }
-
-
-
-    /*
-   @GetMapping("/createProfile/{id}")
-    public String addUserInProfile(@PathVariable Long id, Model model){
-
-            User user = userService.findById(id);
-
-        Profile profile = new Profile();
-        profile.setUser(user);
-            model.addAttribute("user", user); //Skicka till thymeleaf
-            model.addAttribute("profile", profile);//Skicka till thymeleaf
-
-            return "createProfile";
-        }
-
-*/
-
+    @GetMapping("/main/{id}")
+    public String mainPage(Model model,@PathVariable Long id){
+        Profile profileId = profileService.findById(id);
+        model.addAttribute("profile",profileId);
+        return "main";
     }
 
+
+
+
+
+
+
+
+    }
 
