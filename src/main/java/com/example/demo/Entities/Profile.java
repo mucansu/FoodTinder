@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Profile {
   @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     @ManyToOne()
@@ -16,6 +16,24 @@ public class Profile {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "meal_profiles", joinColumns = @JoinColumn(name = "meal_id"), inverseJoinColumns = @JoinColumn(name = "profiles_id"))
     private List<Meal> profileMealList = new ArrayList<>();
+    @Transient
+    private List<Meal> sessionMealList = new ArrayList<>();//den läggs inte till databasen
+
+    public List<Meal> getProfileMealList() {
+        return profileMealList;
+    }
+
+    public void setProfileMealList(List<Meal> profileMealList) {
+        this.profileMealList = profileMealList;
+    }
+
+    public List<Meal> getSessionMealList() {
+        return sessionMealList;
+    }
+
+    public void setSessionMealList(List<Meal> sessionMealList) {
+        this.sessionMealList = sessionMealList;
+    }
 
     public Profile() {
     }
@@ -61,14 +79,5 @@ public class Profile {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public List<Meal> getMealList() {
-        return profileMealList;
-    }
-
-    public void setMealList(List<Meal> mealList) {
-        this.profileMealList = mealList;
-    }
-
 }
 
