@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,7 +34,7 @@ public class MealController {
 
         List<Meal> mealList = mealService.findAll();
         if (index >= mealList.size()){
-
+            model.addAttribute("yesMealList", profile.getMealList());
             return "result";
         }
         Meal meal = mealList.get(index);//Hämtar index på måltid
@@ -48,6 +47,7 @@ public class MealController {
             mealService.addMeal(meal);
             profile.getMealList().add(meal);//Om choice yes läggs måltiden i listan i profiles matlista.
         }
+
         return "main";
     }
 
