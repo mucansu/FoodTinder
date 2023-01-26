@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +29,23 @@ public class MealController {
     @GetMapping("/main/{id}")
     public String mainPage(Model model, @PathVariable Long id,
                            @RequestParam(required = false, defaultValue = "0") Integer index,
-                           @RequestParam(required = false, defaultValue = "default") String choice) {
-        Profile profile = profileService.findById(id);
-        model.addAttribute("profile", profile);
+                           @RequestParam(required = false, defaultValue = "default") String choice,
+                           HttpSession session) {
+        Profile profile = (Profile) session.getAttribute("profile");
+        if (profile==null || profile.getId()!=id){//kolla om gamla profilen är kvar
+            profile = profileService.findById(id);
+            session.setAttribute("profile",profile);
+        }
+//        model.addAttribute("profile", profile);
 
         List<Meal> mealList = mealService.findAll();
         if (index >= mealList.size()){
-            model.addAttribute("yesMealList", profile.getMealList());
+            List<Profile> profiles = (List<Profile>) session.getAttribute("profileList");
+            if (profiles==null){
+                profiles = new ArrayList<>();
+            }
+            profiles.add(profile);
+            model.addAttribute("yesMealList", profile.getSessionMealList());
             return "result";
         }
         Meal meal = mealList.get(index);//Hämtar index på måltid
@@ -43,9 +54,10 @@ public class MealController {
         model.addAttribute("meal", meal);
         model.addAttribute("mealIndex", index+1);//Tar nästa måltid
         if (choice.equals("yes")){
-            meal.getProfiles().add(profile);
-            mealService.addMeal(meal);
-            profile.getMealList().add(meal);//Om choice yes läggs måltiden i listan i profiles matlista.
+//            meal.getProfiles().add(profile);
+//            mealService.addMeal(meal);
+            profile.getSessionMealList().add(meal);//Om choice yes läggs måltiden i listan i profiles matlista.
+
         }
 
         return "main";
