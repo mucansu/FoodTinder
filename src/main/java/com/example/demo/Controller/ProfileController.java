@@ -42,12 +42,6 @@ public class ProfileController {
         profileService.addProfile(profile);
         return "redirect:/profile/" + profile.getUser().getId();
     }
-    @GetMapping("/main/{id}")
-    public String mainPage(Model model,@PathVariable Long id){
-        Profile profileId = profileService.findById(id);
-        model.addAttribute("profile",profileId);
-        return "main";
-    }
 
 
 
