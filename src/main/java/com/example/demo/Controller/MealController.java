@@ -31,31 +31,34 @@ public class MealController {
                            @RequestParam(required = false, defaultValue = "0") Integer index,
                            @RequestParam(required = false, defaultValue = "default") String choice,
                            HttpSession session) {
+
+        //Kollar vilken profil som är inloggad
         Profile profile = (Profile) session.getAttribute("profile");
         if (profile==null || profile.getId()!=id){//kolla om gamla profilen är kvar
             profile = profileService.findById(id);
             session.setAttribute("profile",profile);
         }
-//        model.addAttribute("profile", profile);
 
-        List<Meal> mealList = mealService.findAll();
+
+        List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
+
+        //När mealList är 20 ska resultat visas och profiler som har valt sina YES meals sparas i profileList.
         if (index >= mealList.size()){
-            List<Profile> profiles = (List<Profile>) session.getAttribute("profileList");
-            if (profiles==null){
-                profiles = new ArrayList<>();
+            List<Profile> profileList = (List<Profile>) session.getAttribute("profileList");
+            if (profileList==null){
+                profileList = new ArrayList<>();
             }
-            profiles.add(profile);
+            profileList.add(profile);
             model.addAttribute("yesMealList", profile.getSessionMealList());
             return "result";
         }
+
         Meal meal = mealList.get(index);//Hämtar index på måltid
 
         model.addAttribute("mealList", mealList);
         model.addAttribute("meal", meal);
         model.addAttribute("mealIndex", index+1);//Tar nästa måltid
         if (choice.equals("yes")){
-//            meal.getProfiles().add(profile);
-//            mealService.addMeal(meal);
             profile.getSessionMealList().add(meal);//Om choice yes läggs måltiden i listan i profiles matlista.
 
         }
