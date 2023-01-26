@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<title>Title</title>
 </head>
 <body>
 <h1>Register here</h1>
 <form action="/login" method="post">
-   userName <input name="userName" type="text" th:value="${user.userName}"> <br>
-   First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
-   last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
-   email: <input name="email" type="email" th:value="${user.email}"><br>
-   password: <input name="password" type="password" th:value="${user.password}">
-    <input type="submit">
+	userName <input name="userName" type="text" th:value="${user.userName}"> <br>
+	First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
+	last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
+	email: <input name="email" type="email" th:value="${user.email}"><br>
+	password: <input name="password" type="password" th:value="${user.password}">
+	<input type="submit">
 
 </form>
 

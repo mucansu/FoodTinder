@@ -18,5 +18,6 @@ public class ProfileService {
     public Profile findById(Long id){
         return profileRepository.findById(id).get();
     }
+
 }
 

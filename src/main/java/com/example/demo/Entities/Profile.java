@@ -15,7 +15,7 @@ public class Profile {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "meal_profiles", joinColumns = @JoinColumn(name = "meal_id"), inverseJoinColumns = @JoinColumn(name = "profiles_id"))
-    private List<Meal> mealList = new ArrayList<>();
+    private List<Meal> profileMealList = new ArrayList<>();
 
     public Profile() {
     }
@@ -35,7 +35,7 @@ public class Profile {
         this.id = id;
         this.name = name;
         this.user = user;
-        this.mealList = mealList;
+        this.profileMealList = mealList;
     }
 
     public long getId() {
@@ -63,11 +63,11 @@ public class Profile {
     }
 
     public List<Meal> getMealList() {
-        return mealList;
+        return profileMealList;
     }
 
     public void setMealList(List<Meal> mealList) {
-        this.mealList = mealList;
+        this.profileMealList = mealList;
     }
 
 }

@@ -5,14 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello</h1>
 
-<table>
-    <tr th:each="meal : ${profile.mealList}">
-        <div>
-        <a th:href="'/meal/' + ${profile.id}" th:text="${meal.mealName}"></a> </div>
-    </tr>
-</table>
+<h1 th:text="${meal.mealName}">Hello</h1>
+
+<a th:href="'/main/' + ${profile.id} + '?index=' + ${mealIndex} + '&choice=no'  ">NEJ</a>
+
+<a th:href="'/main/' + ${profile.id} + '?index=' + ${mealIndex} + '&choice=yes'  ">JA</a>
 
 </body>
 </html>

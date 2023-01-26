@@ -16,39 +16,36 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class ProfileController {
-    @Autowired
-    private ProfileService profileService;
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private ProfileService profileService;
+	@Autowired
+	private UserService userService;
 
-    @GetMapping("/profile/{id}")
-    String profilePage(Model model, @PathVariable Long id){
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        return "profile";
-    }
+	@GetMapping("/profile/{id}")
+	String profilePage(Model model, @PathVariable Long id) {
+		User user = userService.findById(id);
+		model.addAttribute("user", user);
+		return "profile";
+	}
 
-    @GetMapping("/addProfile")
-    public String createProfile(Model model, @PathVariable Long id){
-        User userId = userService.findById(id);
-        Profile profile = new Profile();
-        profile.setUser(userId);
-        model.addAttribute("user", userId);
-        model.addAttribute("profile", profile);
-        return "profile";
-    }
-    @PostMapping("/saveProfile")
-    public String saveProfile(@ModelAttribute Profile profile){
-        profileService.addProfile(profile);
-        return "redirect:/profile/" + profile.getUser().getId();
-    }
+	@GetMapping("/addProfile")
+	public String createProfile(Model model, @PathVariable Long id) {
+		User userId = userService.findById(id);
+		Profile profile = new Profile();
+		profile.setUser(userId);
+		model.addAttribute("user", userId);
+		model.addAttribute("profile", profile);
+		return "profile";
+	}
 
-
-
+	@PostMapping("/saveProfile")
+	public String saveProfile(@ModelAttribute Profile profile) {
+		profileService.addProfile(profile);
+		return "redirect:/profile/" + profile.getUser().getId();
+	}
 
 
 
 
-
-    }
+}
 
