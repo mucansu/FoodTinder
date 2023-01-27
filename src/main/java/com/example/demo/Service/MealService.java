@@ -6,6 +6,7 @@ import com.example.demo.Repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,4 +28,5 @@ public class MealService {
 	public Meal addMeal(Meal meal){
 		return mealRepository.save(meal);
 	}
+
 }
