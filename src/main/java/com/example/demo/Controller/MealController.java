@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class MealController {
@@ -56,7 +57,7 @@ public class MealController {
 
         model.addAttribute("mealList", mealList);
         model.addAttribute("meal", meal);
-        model.addAttribute("mealIndex", index);//Tar nästa måltid
+        model.addAttribute("mealIndex", index + 1);//Tar nästa måltid
         if (choice.equals("yes")) {
             profile.getSessionMealList().add(meal);//Om choice yes läggs måltiden i listan i profiles matlista.
 
@@ -94,15 +95,13 @@ public class MealController {
                 matchedMealsIds.add(entry.getKey());
             }
         }
-        List<Meal> mealListById = new ArrayList<>();
-        for (Long id:matchedMealsIds) {
-            Meal meal = new Meal();
-            if (id.equals(meal.getId())){
-                mealListById.add(meal);
-            }
-        }
+
+        List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
+        List<Meal> mealListById = mealList.stream()
+                                           .filter(meal -> matchedMealsIds.contains(meal.getId()))
+                                           .collect(Collectors.toList());
+
         model.addAttribute("mealListById",mealListById);
-//        model.addAttribute("matchedMealsIds", matchedMealsIds); //Adds the matching meals to the model.
         return "matchingMeals"; //Shows the matchingMeals view.
     }
 
