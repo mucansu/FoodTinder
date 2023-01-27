@@ -88,17 +88,17 @@ public class MealController {
 
 		List<Long> matchedMealsIds = new ArrayList<>();
 		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) {
-			if (entry.getValue() == 4) {
+			if (entry.getValue() == profileList.size()) {
 				matchedMealsIds.add(entry.getKey());
 			}
-			if(entry.getValue() == 3) {
+			if (entry.getValue() == profileList.size() - 1) {
 				matchedMealsIds.add(entry.getKey());
 			}
 		}
 
 
-			model.addAttribute("matchingMeals", matchingMeals); //Adds the matching meals to the model.
-			return "matchingMeals"; //Shows the matchingMeals view.
-		}
-
+		model.addAttribute("matchedMealsIds", matchedMealsIds); //Adds the matching meals to the model.
+		return "matchingMeals"; //Shows the matchingMeals view.
 	}
+
+}
