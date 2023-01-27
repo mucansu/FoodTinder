@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Match!</title>
+</head>
+<body>
+<div>
+	<!--Om det finns match -->
+	<h1>MATCH!</h1>
+	<ul>
+		<li th:each="meal : ${matchingMeals}">
+			<p th:text="${meal.mealName}"></p>
+		</li>
+	</ul>
+</div>
+
+	<!--Om det inte blir match-->
+
+</body>
+</html>
