@@ -97,12 +97,20 @@ public class MealController {
 
 		List<Long> matchedMealsIds = new ArrayList<>(); //Creates a new list.
 		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
-			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
-				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
-			} else if (entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
-				matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
-			}
-		}
+//
+        for (int i = profileList.size(); i > 0; i--) { // Instead of checking all the list sizes, this for loop iterates over the list and check the biggest entry value that the list has
+            if (entry.getValue() == profileList.size()){
+            matchedMealsIds.add(entry.getKey());
+            }
+
+        }
+//
+//			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
+//				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
+//			} else if (entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
+//				matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
+//			}
+//		}
 
 		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
 		List<Meal> mealListById = mealList.stream()
