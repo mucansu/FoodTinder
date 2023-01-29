@@ -56,7 +56,8 @@ public class MealController {
 				session.setAttribute("profileList", profileList);
 			}
 			profileList.add(profile);
-			model.addAttribute("yesMealList", profile.getSessionMealList());
+			model.addAttribute("yesMealList", profile.getSessionMealList()); //Adding the yesMealList to the controller.
+			model.addAttribute("profileList", profileList);//Add the profileList to the model.
 			return "result";
 		}
 
@@ -81,34 +82,34 @@ public class MealController {
 		List<Profile> profileList = (List<Profile>) session.getAttribute("profileList");// Gets List of Profiles in the session
 		List<Meal> matchingMeals = new ArrayList<>(); //Empty List to add the matchingMeals to
 
-		Map<Long, Integer> matchedMeals = new HashMap<>();
-		for (Profile profile : profileList) {
-			for (Meal m : profile.getSessionMealList()) {
-				Long id = m.getId();
-				if (!matchedMeals.containsKey(id)) {
-					matchedMeals.put(id, 1);
+		Map<Long, Integer> matchedMeals = new HashMap<>(); //Creates a HashMap
+		for (Profile profile : profileList) { //Loops over the profileList
+			for (Meal m : profile.getSessionMealList()) { //Loops over SessionMealList
+				Long id = m.getId(); //Sets the id to ID of the meal.
+				if (!matchedMeals.containsKey(id)) { //If the meal doesn't exist in the matchedMeals List,
+					matchedMeals.put(id, 1); //It adds it to the matchedMeals MapList and sets the key to 1.
 				} else {
-					int numberOfPreviousOccurrences = matchedMeals.get(id);
-					matchedMeals.put(id, numberOfPreviousOccurrences + 1);
+					int numberOfPreviousOccurrences = matchedMeals.get(id); //Else it finds the ID of the meals key value.
+					matchedMeals.put(id, numberOfPreviousOccurrences + 1); //Adds 1 to the key.
 				}
 			}
 		}
 
-		List<Long> matchedMealsIds = new ArrayList<>();
-		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) {
-			if (entry.getValue() == profileList.size()) {
-				matchedMealsIds.add(entry.getKey());
-			} else if (entry.getValue() == profileList.size() - 1) {
-				matchedMealsIds.add(entry.getKey());
+		List<Long> matchedMealsIds = new ArrayList<>(); //Creates a new list.
+		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
+				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
+			} else if (entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
+				matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
 			}
 		}
 
 		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
 		List<Meal> mealListById = mealList.stream()
-				                          .filter(meal -> matchedMealsIds.contains(meal.getId()))
-				                          .collect(Collectors.toList());
+				                          .filter(meal -> matchedMealsIds.contains(meal.getId())) //Filters meaList and returns mealListById that contain the meals whose id matches the id in matchedMealsIds.
+				                          .collect(Collectors.toList()); //Collects all the filtered meals to a list.
 
-		model.addAttribute("mealListById", mealListById);
+		model.addAttribute("mealListById", mealListById); //Sends the new list to the template matchingMeals.
 		return "matchingMeals"; //Shows the matchingMeals view.
 	}
 
