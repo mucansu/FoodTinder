@@ -18,6 +18,11 @@ public class Meal {
     public Meal() {
     }
 
+    //Constructor bara för test
+    public Meal(String mealName){
+        this.mealName = mealName;
+    }
+
     public Meal(long id, String mealName, List<Profile> profiles) {
         this.id = id;
         this.mealName = mealName;

@@ -9,20 +9,24 @@
     h1 {color:Orange;font-size: 5rem;}
     div {padding: 50px 0px; text-align: center;}
     a {padding: 20px 20px; margin-top: 50px; font-size: 2rem;}
-    </style>
+
+	</style>
 	<!-- End of style -->
 
 </head>
 <body>
 <center>
-<h1>Result</h1>
+	<h1 th:text="'Result for ' + ${session.profile.name}">Result</h1>
 
 	<table>
 		<tr th:each="meal : ${yesMealList}">
 			<p th:text="${meal.mealName}"></p>
 		</tr>
 	</table>
-	<!-- Här behöver vi en startsida knapp -->
+
+	<p><a th:href="'/profile/' + ${session.profile.user.id}">Change profile</a></p>
+	<p><a th:href="@{/matchingMeals}">See matching meals</a></p>
+
 </center>
 </body>
 </html>
