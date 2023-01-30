@@ -27,7 +27,7 @@
 
     <table>
  <tr th:each="profile : ${user.profileList}">
-     <a th:href="'/user/main/' + ${profile.id}" th:text="${profile.name}"></a>
+     <a th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
 </tr>
 </table>
 

@@ -148,4 +148,5 @@ public class MealController {
 		return "redirect:/user/profile/" + user.getId();
 	}
 
+
 }
