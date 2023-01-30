@@ -17,8 +17,12 @@
 </head>
 
 <body>
+
+<p th:text="'Profile: ' + ${session.profile.name}">Current user</p>
+
 <center>
 <div>
+
 <h1 th:text="${meal.mealName}">Hello</h1>
 
 <a th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=no'  ">NEJ</a>
