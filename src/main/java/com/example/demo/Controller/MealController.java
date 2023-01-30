@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
+import com.example.demo.Entities.User;
 import com.example.demo.Repository.MealRepository;
 import com.example.demo.Service.MealService;
 import com.example.demo.Service.ProfileService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -83,6 +85,8 @@ public class MealController {
 		List<Meal> matchingMeals = new ArrayList<>(); //Empty List to add the matchingMeals to
 
 		Map<Long, Integer> matchedMeals = new HashMap<>(); //Creates a HashMap
+
+
 		for (Profile profile : profileList) { //Loops over the profileList
 			for (Meal m : profile.getSessionMealList()) { //Loops over SessionMealList
 				Long id = m.getId(); //Sets the id to ID of the meal.
@@ -96,21 +100,29 @@ public class MealController {
 		}
 
 		List<Long> matchedMealsIds = new ArrayList<>(); //Creates a new list.
-		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
-//
-        for (int i = profileList.size(); i > 0; i--) { // Instead of checking all the list sizes, this for loop iterates over the list and check the biggest entry value that the list has
-            if (entry.getValue() == profileList.size()){
-            matchedMealsIds.add(entry.getKey());
-            }
 
-        }
-//
-//			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
-//				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
-//			} else if (entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
-//				matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
-//			}
-//		}
+		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
+				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
+			}
+		}
+
+		//OM LISTAN ÄR TOM DVS INGEN FULL MATCH
+		if (matchedMealsIds.size() == 0)
+			for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+				if (matchedMealsIds.size() == 0 && entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
+					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
+				}
+			}
+
+		//OM LISTAN FORTFARANDE TOM DVS MATCH - 2
+		if (matchedMealsIds.size() == 0)
+			for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+				if (matchedMealsIds.size() == 0 && entry.getValue() == profileList.size() - 2) { //If the value of the entry equals to the size of "profileList" minus 1.
+					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
+				}
+			}
+
 
 		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
 		List<Meal> mealListById = mealList.stream()
@@ -119,6 +131,14 @@ public class MealController {
 
 		model.addAttribute("mealListById", mealListById); //Sends the new list to the template matchingMeals.
 		return "matchingMeals"; //Shows the matchingMeals view.
+	}
+
+	@GetMapping("/reset")
+	public String resetSession(HttpSession session) {
+		session.invalidate();
+		// Lägg till spring kod.
+		return "redirect:/profile/" + 19; //user.getId();
+
 	}
 
 }
