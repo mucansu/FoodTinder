@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Style ska raderas, endast för uppvisning-->
+    <style>
+    h1 {color:Orange;font-size: 5rem;}
+    div {padding: 50px 0px; text-align: center;}
+    a {padding: 20px 20px; margin-top: 50px; font-size: 2rem;}
+    form {padding: 20px 20px;}
+    </style>
+    <!-- End of style -->
+
+
+
+</head>
+<body>
+<center>
+<h1> create profile here</h1>
+<form action="/saveProfile" method="post">
+    <input type="hidden" name="user" th:value="${user.id}">
+    Profile Name <input name="name" type="text"> <br>
+    <input type="submit" value="Add profile">
+</form>
+
+    <table>
+ <tr th:each="profile : ${user.profileList}">
+     <a th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
+</tr>
+</table>
+
+</center>
+
+</body>
+</html>
