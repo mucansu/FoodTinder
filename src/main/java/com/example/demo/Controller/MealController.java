@@ -140,7 +140,8 @@ public class MealController {
 
 	@GetMapping("/reset")
 	public String resetSession(HttpSession session) {
-		session.invalidate(); //Den här rensar sessionen
+		session.removeAttribute("sessionMealList");
+		//session.invalidate(); //Den här rensar sessionen
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //SpringSecurity kod
 		String currentPrincipalName = authentication.getName();//SpringSecurity kod
 		User user = userRepository.findByEmail(currentPrincipalName);//SpringSecurity kod
