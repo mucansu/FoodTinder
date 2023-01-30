@@ -36,6 +36,10 @@ background:#ffffff;
 
 }
 
+a {
+text-decoration: none;
+}
+
 .nyform {
     width: 60%;
     margin: 60px auto;
@@ -70,6 +74,7 @@ background: #FFED00;
 
 .choicebutton-no {
 background: #E61F93;
+color: white;
 }
 
 
@@ -77,4 +82,17 @@ background: #E61F93;
     background: #FAA94A;
     color: black;
 }
+
+.registerform .form-control:focus {
+    background-color: #daedff;
+    box-shadow: none;
+    border-color: black;
+}
+
+.registerform .form-control {
+    border: 2px solid black;
+        box-shadow: 3px 3px 1px 1px black;
+        border-radius: 0;
+}
+
 

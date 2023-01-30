@@ -5,17 +5,40 @@
     <title>login here</title>
 </head>
 <body>
-<section>
+
+    <!--
 <div th:if="${param.error}">
     <h4>Invalid username and password</h4>
-
 </div>
-<form th:action="@{/dologin}" method="post">
+<form th:action="@{/dologin}" method="post">-->
+    <!--
+      Email:<input type="email" name="username"><br>--> <!--th:value="${user.userName}"-->
+    <!--  Password: <input type="password" name="password"><br>--> <!--th:value="${user.password}"-->
+    <!-- <input type="submit" value="Login">
+   </form> -->
+    <!--Bootstrap form-->
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class="container nyform align-center row registerform">
+            <h1 class="text-center">Login-along below!</h1><br>
+            <div class="col-md-6">
+    <form th:action="@{/dologin}" method="post">
+        <div th:if="${param.error}">
+            <h4>Invalid username and password</h4>
 
-  Email:<input type="email" name="username"><br> <!--th:value="${user.userName}"-->
-  Password: <input type="password" name="password"><br> <!--th:value="${user.password}"-->
-  <input type="submit" value="Login">
-</form>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <button type="submit" class="choicebutton choicebutton-no">Login</button>
+    </form>
+
 </section>
 
 </body>

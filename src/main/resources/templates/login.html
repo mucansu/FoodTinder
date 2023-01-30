@@ -5,7 +5,7 @@
     <title>login here</title>
 </head>
 <body>
-<section>
+
     <!--
 <div th:if="${param.error}">
     <h4>Invalid username and password</h4>
@@ -17,7 +17,10 @@
     <!-- <input type="submit" value="Login">
    </form> -->
     <!--Bootstrap form-->
-
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class="container nyform align-center row registerform">
+            <h1 class="text-center">Login-along below!</h1><br>
+            <div class="col-md-6">
     <form th:action="@{/dologin}" method="post">
         <div th:if="${param.error}">
             <h4>Invalid username and password</h4>
@@ -33,7 +36,7 @@
             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="choicebutton choicebutton-no">Login</button>
     </form>
 
 </section>

@@ -1,33 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <!-- Style ska raderas, endast för uppvisning-->
-    <style>
-    h1 {color:Orange;font-size: 5rem;}
-    div {padding: 50px 0px; text-align: center;}
-    a {padding: 20px 20px; margin-top: 50px; font-size: 2rem;}
-    form {padding: 20px 20px;}
-    </style>
-    <!-- End of style -->
-
-
-
 </head>
 <body>
-<center>
-<h1> create profile here</h1>
+
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class="nyform container align-center">
+            <h1 class="text-center">Hi <span class="text-capitalize" th:text="${user.firstName}"></span>!<br>Enter your family members below!</h1>
 <form action="/user/saveProfile" method="post">
     <input type="hidden" name="user" th:value="${user.id}">
     Profile Name <input name="name" type="text"> <br>
-    <input type="submit" value="Add profile">
+    <button type="submit" class="choicebutton choicebutton-yes">Add profile</button>
 </form>
 
     <table>
  <tr th:each="profile : ${user.profileList}">
-     <a th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
+     <a class="choicebutton" th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
 
 </tr>
 
@@ -35,7 +26,7 @@
     <div><a href="/mealList">MealList</a></div>
 
 
-</center>
+</div></section>
 
 </body>
 </html>

@@ -5,7 +5,7 @@
 	<title>Title</title>
 </head>
 <body>
-<section>
+
 	<!--<h1>Register here</h1>
     <form th:action="@{/register}" method="post" th:object="${user}">
         userName <input name="userName" type="text" th:value="${user.userName}"> <br>
@@ -18,10 +18,10 @@
     </form>-->
 
 	<!--Register Form-->
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
+	<section class="banner d-flex justify-content-center align-items-center">
+		<div class="container nyform align-center row registerform">
+			<h1 class="text-center">Register here! </h1>
+			<div class="col-md-6">
 				<!--	<div class="my-card mt-2"> --><!-- mt means margin top -->
 				<!-- to send the alert message in case of success or wrong entry -->
 				<!--th:if is used to show message in case of error -->
@@ -37,8 +37,6 @@
 				<!--	<div class="container text-center">
 						<img style="width:60px;" src=""th:src="@{/img/membership.png}" alt="">
 					</div>-->
-
-				<h1 class="text-center">Register here!!</h1>
 				<form  method="post" th:action="@{/register}" th:object="${user}">
 					<!--name field -->
 					<div class="mb-3">
@@ -48,7 +46,7 @@
 							   class="form-control"
 							   id="name_field"
 							   aria-describedby="emailHelp"
-							   placeholder="enter your name"
+							   placeholder="Please pick a username"
 							   required
 
 							   th:value="${user.userName}">
@@ -58,13 +56,13 @@
 					<!--First Name field-->
 
 					<div class="mb-3">
-						<label for="name_field" class="form-label">First Name</label>
+						<label for="name_field" class="form-label">First name</label>
 						<input type="text"
 							   name="firstName"
 							   class="form-control"
 
 							   aria-describedby="emailHelp"
-							   placeholder="enter your name"
+							   placeholder="First name"
 							   required
 
 							   th:value="${user.firstName}">
@@ -75,13 +73,13 @@
 					<!--Last Name field-->
 
 					<div class="mb-3">
-						<label for="name_field" class="form-label">Last Name</label>
+						<label for="name_field" class="form-label">Last name</label>
 						<input type="text"
 							   name="lastName"
 							   class="form-control"
 
 							   aria-describedby="emailHelp"
-							   placeholder="enter your name"
+							   placeholder="Last name"
 							   required
 
 							   th:value="${user.lastName}">
@@ -98,7 +96,7 @@
 							   class="form-control"
 							   id="email_field"
 							   aria-describedby="emailHelp"
-							   placeholder="enter your email"
+							   placeholder="Email"
 							   required
 							   th:value="${user.email}">
 					</div>
@@ -110,7 +108,7 @@
 							   class="form-control"
 							   id="password_field"
 							   aria-describedby="emailHelp"
-							   placeholder="enter your password"
+							   placeholder="Pick a password"
 							   required
 							   th:value="${user.password}"
 						>
@@ -119,13 +117,11 @@
 
 
 					<!--creating buttons for submit and login -->
-					<div class="container d-grid gap-2 text-center mt-3">
-						<button type="submit" class="btn bg-primary text-white text-uppercase">
+					<div class="row justify-content-center">
+						<button type="submit" class="choicebutton choicebutton-yes col-5">
 							Submit
 						</button>
-						<button type="submit" class="btn bg-primary text-white text-uppercase">
-							<a href ="login">Go to Login</a>
-						</button>
+						<a class="choicebutton choicebutton-no col-5" href="login">Go to Login</a>
 
 					</div>
 
@@ -138,7 +134,6 @@
 
 	</div>
 
-	</div>
 
 
 </section>
