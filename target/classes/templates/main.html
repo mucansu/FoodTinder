@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Style ska raderas, endast för uppvisning-->
+    <style>
+    h1 {color:Orange;font-size: 5rem;}
+    div {padding: 50px 0px; text-align: center;}
+    a {padding: 20px 20px; margin-top: 50px; font-size: 2rem;}
+    a {text-decoration: none; color: black; padding: 20px; border: 2px solid black; margin: 50px; font-size: 2rem;}
+
+    </style>
+    <!-- End of style -->
+
+</head>
+
+<body>
+
+<p th:text="'Profile: ' + ${session.profile.name}">Current user</p>
+
+<center>
+<div>
+
+<h1 th:text="${meal.mealName}">Hello</h1>
+
+<a th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=no'  ">NEJ</a>
+
+<a th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=yes'  ">JA</a>
+</div>
+
+
+</center>
+</body>
+</html>
