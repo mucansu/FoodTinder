@@ -106,7 +106,23 @@ public class MealController {
 
 		List<Long> matchedMealsIds = new ArrayList<>(); //Creates a new list.
 
-		for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+
+		for (int i = 1; i <= profileList.size(); i++) {
+			for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+				if (entry.getValue() == profileList.size()) { //If the value of the entry equals to the size of "profileList" minus 1.
+					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
+				}
+			}
+
+			if (matchedMealsIds.size() == 0)
+				for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
+					if (entry.getValue() == profileList.size() - i) { //If the value of the entry equals to the size of "profileList" minus i.
+						matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
+					}
+				}
+		}
+
+		/*for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
 			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
 				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
 			}
@@ -115,7 +131,7 @@ public class MealController {
 		//OM LISTAN ÄR TOM DVS INGEN FULL MATCH
 		if (matchedMealsIds.size() == 0)
 			for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
-				if (matchedMealsIds.size() == 0 && entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
+				if (entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
 					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
 				}
 			}
@@ -126,7 +142,7 @@ public class MealController {
 				if (matchedMealsIds.size() == 0 && entry.getValue() == profileList.size() - 2) { //If the value of the entry equals to the size of "profileList" minus 1.
 					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
 				}
-			}
+			}*/
 
 
 		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
