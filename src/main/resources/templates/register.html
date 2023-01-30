@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
 </head>
 <body>
+<section>
 <h1>Register here</h1>
-<form th:action="@{/added}" method="post" th:object="${user}">
+<form th:action="@{/register}" method="post" th:object="${user}">
 	userName <input name="userName" type="text" th:value="${user.userName}"> <br>
 	First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
 	last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
@@ -16,6 +17,7 @@
 	<p><a href ="login">Go to Login</a></p>
 
 </form>
+</section>
 
 
 </body>
