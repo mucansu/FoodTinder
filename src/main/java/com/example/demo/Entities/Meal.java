@@ -14,19 +14,18 @@ public class Meal {
 
     @ManyToMany(mappedBy = "profileMealList")
     private List<Profile> profiles= new ArrayList<>();
+    @ManyToOne
+    private User user;
 
     public Meal() {
     }
 
-    //Constructor bara för test
-    public Meal(String mealName){
-        this.mealName = mealName;
-    }
 
-    public Meal(long id, String mealName, List<Profile> profiles) {
+    public Meal(long id, String mealName, List<Profile> profiles, User user) {
         this.id = id;
         this.mealName = mealName;
         this.profiles = profiles;
+        this.user = user;
     }
 
     public long getId() {
@@ -52,4 +51,14 @@ public class Meal {
     public void setProfiles(List<Profile> profiles) {
         this.profiles = profiles;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
+
+

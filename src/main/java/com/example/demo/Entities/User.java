@@ -25,32 +25,26 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Profile> profileList = new ArrayList<>();
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Meal> userMealList = new ArrayList<>();
 	public User() {
 
 	}
 
 
-	public User(Long id, String userName, String firstName, String lastName, String email, String password) {
+	public User(Long id, String userName, String firstName, String lastName, String email,
+				String password, String role, List<Profile> profileList, List<Meal> userMealList) {
 		this.id = id;
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-
-	}
-
-	public User(Long id, String userName, String firstName, String lastName, String email, String password,List<Profile> profileList) {
-		this.id = id;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-
+		this.role = role;
 		this.profileList = profileList;
-
+		this.userMealList = userMealList;
 	}
+
 
 	public String getRole() {
 		return role;
@@ -114,5 +108,13 @@ public class User {
 
 	public void setProfileList(List<Profile> profileList) {
 		this.profileList = profileList;
+	}
+
+	public List<Meal> getUserMealList() {
+		return userMealList;
+	}
+
+	public void setUserMealList(List<Meal> userMealList) {
+		this.userMealList = userMealList;
 	}
 }

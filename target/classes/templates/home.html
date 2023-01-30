@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <title>FoodAlong</title>
 </head>
 <body>
-<form action="/">
- <h1>This is home page</h1>
+<section class="banner d-flex justify-content-center align-items-center">
 
-    <p><a href="/register">Registration</a></p>
-</form>
+    <h1 class="font-weight-bold">We Help You to</h1>
+    <p>Get Along With Food Along!!</p>
+
+    <button class="btn bg-primary btn-lg text-white"><a href="/register">Get Started</a></button>
+  <!--  <p><a href="/register">Get Started</a></p>-->
+
+</section>
 
 </body>
 </html>

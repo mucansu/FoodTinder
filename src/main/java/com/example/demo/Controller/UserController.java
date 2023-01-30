@@ -22,11 +22,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	//@GetMapping("/")
-	//public String homePage(){
-	//	return"home";
-	//}
 	@GetMapping("/")
+	public String homePage(){
+		return"home";
+	}
+	@GetMapping("/register")
 	public String loginPage(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);

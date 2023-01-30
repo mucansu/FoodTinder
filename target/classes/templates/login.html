@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <title>login here</title>
 </head>
 <body>
+<section>
 <div th:if="${param.error}">
     <h4>Invalid username and password</h4>
 
@@ -15,6 +16,7 @@
   Password: <input type="password" name="password"><br> <!--th:value="${user.password}"-->
   <input type="submit" value="Login">
 </form>
+</section>
 
 </body>
 </html>
