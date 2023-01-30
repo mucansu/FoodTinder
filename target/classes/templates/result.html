@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Hej</title>
+
+	<!-- Style ska raderas, endast för uppvisning samt center-->
+	<style>
+    h1 {color:Orange;font-size: 5rem;}
+    div {padding: 50px 0px; text-align: center;}
+    a {padding: 20px 20px; margin-top: 50px; font-size: 2rem;}
+
+	</style>
+	<!-- End of style -->
+
+</head>
+<body>
+<center>
+	<h1 th:text="'Result for ' + ${session.profile.name}">Result</h1>
+
+	<!-- render the result of the profiles yesMealList -->
+	<table>
+		<tr th:each="meal : ${yesMealList}">
+			<p th:text="${meal.mealName}"></p>
+		</tr>
+	</table>
+
+	<p><a th:href="'/profile/' + ${session.profile.user.id}">Change profile</a></p>
+
+	<!-- If profileList.size is greater than 0 then the matchingMeals link will show -->
+	<p th:if="${profileList.size() > 1}"><a th:href="@{/matchingMeals}">See matching meals</a></p>
+
+</center>
+</body>
+</html>

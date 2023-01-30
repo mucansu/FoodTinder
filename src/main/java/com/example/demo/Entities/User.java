@@ -20,6 +20,7 @@ public class User {
 	private String lastName;
 	private String email;
 	private String password;
+	private String role;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Profile> profileList = new ArrayList<>();
@@ -36,16 +37,27 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+
 	}
 
-	public User(Long id, String userName, String firstName, String lastName, String email, String password, List<Profile> profileList) {
+	public User(Long id, String userName, String firstName, String lastName, String email, String password,List<Profile> profileList) {
 		this.id = id;
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+
 		this.profileList = profileList;
+
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public Long getId() {

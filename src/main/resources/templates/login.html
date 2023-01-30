@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+    <meta charset="UTF-8">
+    <title>login here</title>
 </head>
 <body>
-<h1>Register here</h1>
-<form action="/login" method="post">
-	userName <input name="userName" type="text" th:value="${user.userName}"> <br>
-	First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
-	last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
-	email: <input name="email" type="email" th:value="${user.email}"><br>
-	password: <input name="password" type="password" th:value="${user.password}">
-	<input type="submit">
+<div th:if="${param.error}">
+    <h4>Invalid username and password</h4>
 
+</div>
+<form th:action="@{/dologin}" method="post">
+
+  Email:<input type="email" name="username"><br> <!--th:value="${user.userName}"-->
+  Password: <input type="password" name="password"><br> <!--th:value="${user.password}"-->
+  <input type="submit" value="Login">
 </form>
-
 
 </body>
 </html>
