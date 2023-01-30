@@ -28,8 +28,12 @@
     <table>
  <tr th:each="profile : ${user.profileList}">
      <a th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
+
 </tr>
+
 </table>
+    <div><a href="/mealList">MealList</a></div>
+
 
 </center>
 

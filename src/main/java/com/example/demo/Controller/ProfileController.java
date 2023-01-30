@@ -35,9 +35,7 @@ public class ProfileController {
 		return "profile";
 	}
 	@GetMapping("/profile/{id}")
-	String profilePage(Principal p,Model model, @PathVariable Long id) {
-		//String em=p.getName();
-	//	User user1=userRepository.findByEmail(em);
+	String profilePage(Model model, @PathVariable Long id) {
 		User user = userService.findById(id);
 		model.addAttribute("user", user);
 		return "profile";

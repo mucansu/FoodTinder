@@ -164,5 +164,10 @@ public class MealController {
 		return "redirect:/user/profile/" + user.getId();
 	}
 
+	@GetMapping("/mealList")
+	public String addMealList(){
+		return "mealList";
+	}
+
 
 }
