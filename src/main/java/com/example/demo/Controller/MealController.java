@@ -4,9 +4,12 @@ import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
 import com.example.demo.Repository.MealRepository;
+import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.MealService;
 import com.example.demo.Service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,8 @@ public class MealController {
 	private ProfileService profileService;
 	@Autowired
 	private MealRepository mealRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 
 	@GetMapping("/main/{id}")
@@ -135,10 +140,11 @@ public class MealController {
 
 	@GetMapping("/reset")
 	public String resetSession(HttpSession session) {
-		session.invalidate();
-		// Lägg till spring kod.
-		return "redirect:/profile/" + 19; //user.getId();
-
+		session.invalidate(); //Den här rensar sessionen
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //SpringSecurity kod
+		String currentPrincipalName = authentication.getName();//SpringSecurity kod
+		User user = userRepository.findByEmail(currentPrincipalName);//SpringSecurity kod
+		return "redirect:/user/profile/" + user.getId();
 	}
 
 }

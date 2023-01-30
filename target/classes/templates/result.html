@@ -25,10 +25,13 @@
 		</tr>
 	</table>
 
-	<p><a th:href="'/profile/' + ${session.profile.user.id}">Change profile</a></p>
+	<p><a th:href="'/user/profile/' + ${session.profile.user.id}">Change profile</a></p>
 
 	<!-- If profileList.size is greater than 0 then the matchingMeals link will show -->
 	<p th:if="${profileList.size() > 1}"><a th:href="@{/matchingMeals}">See matching meals</a></p>
+
+
+
 
 </center>
 </body>

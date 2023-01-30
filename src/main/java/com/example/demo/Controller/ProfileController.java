@@ -29,7 +29,7 @@ public class ProfileController {
 	public String getProfile(Model model){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentPrincipalName = authentication.getName();
-User user = userRepository.findByEmail(currentPrincipalName);
+		User user = userRepository.findByEmail(currentPrincipalName);
 		model.addAttribute("user", user);
 
 		return "profile";
