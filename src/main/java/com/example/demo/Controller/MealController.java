@@ -122,30 +122,10 @@ public class MealController {
 				}
 		}
 
-		/*for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
-			if (entry.getValue() == profileList.size()) { //For each entry it checks if the value of the entry equals to the size of the list profileList.
-				matchedMealsIds.add(entry.getKey()); //If so, it adds the key of the entry to the matcheMealsIds List.
-			}
-		}
 
-		//OM LISTAN ÄR TOM DVS INGEN FULL MATCH
-		if (matchedMealsIds.size() == 0)
-			for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
-				if (entry.getValue() == profileList.size() - 1) { //If the value of the entry equals to the size of "profileList" minus 1.
-					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
-				}
-			}
-
-		//OM LISTAN FORTFARANDE TOM DVS MATCH - 2
-		if (matchedMealsIds.size() == 0)
-			for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
-				if (matchedMealsIds.size() == 0 && entry.getValue() == profileList.size() - 2) { //If the value of the entry equals to the size of "profileList" minus 1.
-					matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
-				}
-			}*/
-
-
-		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
+		//Hittar namnet på alla de ID:n som föregående funktion har hittat med högst keyvalue.
+		//Vi behöver ha namnet på alla meals och i HASHMAPPEN Ovan så kollar vi endast ID.
+		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas (så den kan hitta namnet på de ID som har fått match)
 		List<Meal> mealListById = mealList.stream()
 				                          .filter(meal -> matchedMealsIds.contains(meal.getId())) //Filters meaList and returns mealListById that contain the meals whose id matches the id in matchedMealsIds.
 				                          .collect(Collectors.toList()); //Collects all the filtered meals to a list.
