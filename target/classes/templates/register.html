@@ -5,135 +5,128 @@
 	<title>Title</title>
 </head>
 <body>
-<section>
-<!--<h1>Register here</h1>
-<form th:action="@{/register}" method="post" th:object="${user}">
-	userName <input name="userName" type="text" th:value="${user.userName}"> <br>
-	First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
-	last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
-	email: <input name="email" type="email" th:value="${user.email}"><br>
-	password: <input name="password" type="password" th:value="${user.password}">
-	<input type="submit">
-	<p><a href ="login">Go to Login</a></p>
 
-</form>-->
+	<!--<h1>Register here</h1>
+    <form th:action="@{/register}" method="post" th:object="${user}">
+        userName <input name="userName" type="text" th:value="${user.userName}"> <br>
+        First name <input name="firstName" type="text" th:value="${user.firstName}"><br>
+        last name: <input name="lastName" type="text" th:value="${user.lastName}"><br>
+        email: <input name="email" type="email" th:value="${user.email}"><br>
+        password: <input name="password" type="password" th:value="${user.password}">
+        <input type="submit">
+        <p><a href ="login">Go to Login</a></p>
+    </form>-->
 
 	<!--Register Form-->
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
-			<!--	<div class="my-card mt-2"> --><!-- mt means margin top -->
-					<!-- to send the alert message in case of success or wrong entry -->
-					<!--th:if is used to show message in case of error -->
-					<!--th:classappend type is used to show the type of message. alert in the next class will show the message type -->
-					<!--<div  th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">-->
-						<!--to show the content of the message in the controller -->
-					<!--	<p class="text-center" th:text="${session.message.content}"></p>-->
-						<!-- message will be seen for one time and then it will be removed -->
+	<section class="banner d-flex justify-content-center align-items-center">
+		<div class="container nyform align-center row registerform">
+			<h1 class="text-center">Register here! </h1>
+			<div class="col-md-6">
+				<!--	<div class="my-card mt-2"> --><!-- mt means margin top -->
+				<!-- to send the alert message in case of success or wrong entry -->
+				<!--th:if is used to show message in case of error -->
+				<!--th:classappend type is used to show the type of message. alert in the next class will show the message type -->
+				<!--<div  th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">-->
+				<!--to show the content of the message in the controller -->
+				<!--	<p class="text-center" th:text="${session.message.content}"></p>-->
+				<!-- message will be seen for one time and then it will be removed -->
 
 
 				<!--	</div>-->
-					<!--to insert an image, use img tab. to center the image use a div and write text-center-->
+				<!--to insert an image, use img tab. to center the image use a div and write text-center-->
 				<!--	<div class="container text-center">
 						<img style="width:60px;" src=""th:src="@{/img/membership.png}" alt="">
 					</div>-->
+				<form  method="post" th:action="@{/register}" th:object="${user}">
+					<!--name field -->
+					<div class="mb-3">
+						<label for="name_field" class="form-label">User Name</label>
+						<input type="text"
+							   name="userName"
+							   class="form-control"
+							   id="name_field"
+							   aria-describedby="emailHelp"
+							   placeholder="Please pick a username"
+							   required
 
-					<h1 class="text-center">Register here!!</h1>
-					<form  method="post" th:action="@{/register}" th:object="${user}">
-						<!--name field -->
-						<div class="mb-3">
-							<label for="name_field" class="form-label">User Name</label>
-							<input type="text"
-								   name="userName"
-								   class="form-control"
-								   id="name_field"
-								   aria-describedby="emailHelp"
-								   placeholder="enter your name"
-								   required
+							   th:value="${user.userName}">
+						<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
 
-								   th:value="${user.userName}">
-							<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
+					</div>
+					<!--First Name field-->
 
-						</div>
-						<!--First Name field-->
+					<div class="mb-3">
+						<label for="name_field" class="form-label">First name</label>
+						<input type="text"
+							   name="firstName"
+							   class="form-control"
 
-						<div class="mb-3">
-							<label for="name_field" class="form-label">First Name</label>
-							<input type="text"
-								   name="firstName"
-								   class="form-control"
+							   aria-describedby="emailHelp"
+							   placeholder="First name"
+							   required
 
-								   aria-describedby="emailHelp"
-								   placeholder="enter your name"
-								   required
+							   th:value="${user.firstName}">
+						<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
 
-								   th:value="${user.firstName}">
-							<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
+					</div>
 
-						</div>
+					<!--Last Name field-->
 
-						<!--Last Name field-->
+					<div class="mb-3">
+						<label for="name_field" class="form-label">Last name</label>
+						<input type="text"
+							   name="lastName"
+							   class="form-control"
 
-						<div class="mb-3">
-							<label for="name_field" class="form-label">Last Name</label>
-							<input type="text"
-								   name="lastName"
-								   class="form-control"
+							   aria-describedby="emailHelp"
+							   placeholder="Last name"
+							   required
 
-								   aria-describedby="emailHelp"
-								   placeholder="enter your name"
-								   required
+							   th:value="${user.lastName}">
+						<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
 
-								   th:value="${user.lastName}">
-							<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
-
-						</div>
+					</div>
 
 
-						<!--email field -->
-						<div class="mb-3">
-							<label for="email_field" class="form-label">Email</label>
-							<input type="email"
-								   name="email"
-								   class="form-control"
-								   id="email_field"
-								   aria-describedby="emailHelp"
-								   placeholder="enter your email"
-								   required
-								   th:value="${user.email}">
-						</div>
-						<!--password field -->
-						<div class="mb-3">
-							<label for="password_field" class="form-label">Password</label>
-							<input type="password"
-								   name="password"
-								   class="form-control"
-								   id="password_field"
-								   aria-describedby="emailHelp"
-								   placeholder="enter your password"
-								   required
-								   th:value="${user.password}"
-							>
-						</div>
+					<!--email field -->
+					<div class="mb-3">
+						<label for="email_field" class="form-label">Email</label>
+						<input type="email"
+							   name="email"
+							   class="form-control"
+							   id="email_field"
+							   aria-describedby="emailHelp"
+							   placeholder="Email"
+							   required
+							   th:value="${user.email}">
+					</div>
+					<!--password field -->
+					<div class="mb-3">
+						<label for="password_field" class="form-label">Password</label>
+						<input type="password"
+							   name="password"
+							   class="form-control"
+							   id="password_field"
+							   aria-describedby="emailHelp"
+							   placeholder="Pick a password"
+							   required
+							   th:value="${user.password}"
+						>
+					</div>
 
 
 
-						<!--creating buttons for submit and login -->
-						<div class="container d-grid gap-2 text-center mt-3">
-							<button type="submit" class="btn bg-primary text-white text-uppercase">
-								Submit
-							</button>
-							<button type="submit" class="btn bg-primary text-white text-uppercase">
-								<a href ="login">Go to Login</a>
-							</button>
+					<!--creating buttons for submit and login -->
+					<div class="row justify-content-center">
+						<button type="submit" class="choicebutton choicebutton-yes col-5">
+							Submit
+						</button>
+						<a class="choicebutton choicebutton-no col-5" href="login">Go to Login</a>
 
-						</div>
+					</div>
 
 
-					</form>
-
-				</div>
+				</form>
 
 			</div>
 
@@ -141,8 +134,6 @@
 
 	</div>
 
-
-</section>
 
 
 </body>

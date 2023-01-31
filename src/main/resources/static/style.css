@@ -1,5 +1,6 @@
 body{
 background-color: #DAEDFF;
+font-family: 'Roboto Slab', sans-serif;
 }
 .bg-primary{
 background: #000000 !important;
@@ -7,21 +8,91 @@ background: #000000 !important;
 .banner{
 width:100%;
 height:93vh;
-background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(../images/MicrosoftTeams-image.png);
-
+background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(../images/hero3.png);
 color:white;
-background-size:cover;
 }
 .my-card{
 padding:20px;
 background:#ffffff;
 }
-form {
+.get-started-form {
     width: 60%;
     margin: 60px auto;
     background: WHITE;
+    color: black;
     padding: 20px 20px 20px 20px;
     text-align: center;
     border: 5px solid black;
     box-shadow: 12px 12px 2px 1px black;
 }
+
+.container {
+    background-color: #DAEDFF;
+    align-items: center;
+    justify-content: center;
+    color: black;
+   padding-top: 3rem;
+   padding-bottom: 3rem;
+
+}
+
+a {
+text-decoration: none;
+}
+
+.nyform {
+    width: 60%;
+    margin: 60px auto;
+    background: WHITE;
+    padding: 2rem;
+    text-align: center;
+    border: 5px solid black;
+    box-shadow: 12px 12px 2px 1px black;
+}
+
+button {
+    border-radius: 0px;
+}
+
+.choicebutton {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    font-weight: bold;
+    color: black;
+    border: 2px solid black;
+    box-shadow: 3px 3px 1px 1px black;
+    outline: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: ease .3s;
+}
+
+.choicebutton-yes {
+background: #FFED00;
+}
+
+.choicebutton-no {
+background: #E61F93;
+color: white;
+}
+
+
+.choicebutton:hover {
+    background: #FAA94A;
+    color: black;
+}
+
+.registerform .form-control:focus {
+    background-color: #daedff;
+    box-shadow: none;
+    border-color: black;
+}
+
+.registerform .form-control {
+    border: 2px solid black;
+        box-shadow: 3px 3px 1px 1px black;
+        border-radius: 0;
+}
+
+

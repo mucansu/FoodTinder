@@ -33,7 +33,7 @@ public class UserController {
 		return "register";
 	}
 
-	@PostMapping("/added")
+	@PostMapping("/register")
 	public String register(@ModelAttribute User user, Model model) {
 		model.addAttribute("user", user);
 		user.setPassword(bp.encode(user.getPassword()));
@@ -41,7 +41,7 @@ public class UserController {
 		userService.addUser(user);
 
 		//return "profile";
-		return "register";
+		return "redirect:/user/profile/";
 	}
 
 	@GetMapping("/login")
