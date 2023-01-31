@@ -1,35 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
 <head>
 	<meta charset="UTF-8">
 	<title>Match!</title>
 
-	<!-- Style ska raderas, endast för uppvisning-->
-	<style>
-    h1 {color:Orange;font-size: 5rem;}
-    div {padding: 5px 0px; text-align: center;}
-    a {padding: 20px 20px; margin-top: 50px; font-size: 2rem;}
-    a {text-decoration: none; color: black; padding: 20px; border: 2px solid black; margin: 50px; font-size: 2rem;}
 
-    </style>
-	<!-- End of style -->
 
 </head>
 <body>
-<center>
-<div>
-	<!--Om det finns match -->
-	<h1>MATCH!</h1>
-	<div th:each="meal : ${mealListById}">
-		<p th:text="${meal.mealName}"></p>
-	</div>
-</div>
-</center>
-	<!--Om det inte blir match-->
-	<!--Knapp för att återställa session-->
-
-<a href="/reset/">Reset Session</a>
-
+<section class="banner d-flex justify-content-center align-items-center">
+	<div class="nyform container align-center">
+		<h1 class="text-center">It's a match!</h1><br>
+		<h3 class="text-left text-capitalize" th:each="meal : ${mealListById}">
+			<p th:text="${meal.mealName}"></p>
+		</h3>
+	<br><br>
+<a class="choicebutton" href="/reset/">Reset Session</a>
+		<div>
 
 </body>
 </html>
