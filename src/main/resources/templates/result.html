@@ -6,23 +6,22 @@
 
 </head>
 <body>
-	<div class="container nyform mt-3 align-center">
+	<section class="container nyform mt-3 align-center">
 			<h2 class="text-center">Today <span class="text-capitalize" th:text="${session.profile.name}"></span> is craving for...</h2>
 	<!-- render the result of the profiles yesMealList -->
-	<table>
-	<h3	class="text-capitalize"><tr th:each="meal : ${yesMealList}">
-			<p th:text="${meal.mealName}"></p>
-		</tr></h3>
-	</table>
+	<table style="width:100%;">
 
+	<tr th:each="meal : ${yesMealList}">
+		<td>
+			<h3 class="text-capitalize text-center">😊</i> <span th:text="${meal.mealName}"></span></h3></td>
+		</tr>
+	</table>
+<p></p>
 	<p><a class="choicebutton choicebutton-no" th:href="'/user/profile/' + ${session.profile.user.id}">Change profile</a></p>
 
 	<!-- If profileList.size is greater than 0 then the matchingMeals link will show -->
 	<p th:if="${profileList.size() > 1}"><a th:href="@{/matchingMeals}">See matching meals</a></p>
-</div>
+</section>
 
-
-
-</div>
 </body>
 </html>
