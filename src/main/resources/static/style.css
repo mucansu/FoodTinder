@@ -100,3 +100,10 @@ color: white;
 display: inline;
 justify-text: left;
 }
+
+.minigul {
+        height: 10%;
+        width: 10%;
+        background: url(../images/mini-gul.png);
+        display: block;
+        }
