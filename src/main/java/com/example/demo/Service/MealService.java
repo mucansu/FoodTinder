@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
+import com.example.demo.Entities.User;
 import com.example.demo.Repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,18 @@ public class MealService {
 	public Meal addMeal(Meal meal){
 		return mealRepository.save(meal);
 	}
+
+	public List<Meal> findByUser(User user) {
+		return mealRepository.findByUser(user);
+	}
+
+	public Meal deleteById(Long id) {
+		Meal meal = mealRepository.findById(id).orElse(null);
+		if (meal != null) {
+			mealRepository.delete(meal);
+		}
+		return meal;
+	}
+
 
 }

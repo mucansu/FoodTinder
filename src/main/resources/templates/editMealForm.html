@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Meal</title>
+</head>
+<body>
+<center>
+	<h1>Edit item</h1>
+
+	<form action="/saveEditedMeal" method="POST" >
+		<input type="hidden" name="id" th:value="${meal.id}">
+		<input type="text" name="mealName" th:value="${meal.mealName}"/>
+		<input type="submit" value="Save Meal">
+	</form>
+
+</center>
+</body>
+</html>

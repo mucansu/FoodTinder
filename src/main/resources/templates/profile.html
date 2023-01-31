@@ -9,7 +9,7 @@
 
     <section class="banner d-flex justify-content-center align-items-center">
         <div class="nyform container align-center">
-            <h1 class="text-center">Hi <span class="text-capitalize" th:text="${user.firstName}"></span>!<br>Enter your family members below!</h1>
+            <h1 class="text-center">Hi <span class="text-capitalize" th:text="${user.firstName}"></span>!</h1><br><p>Enter your family members below!</p>
 <form action="/user/saveProfile" method="post">
     <input type="hidden" name="user" th:value="${user.id}">
     Profile Name <input name="name" type="text"> <br>
@@ -23,7 +23,8 @@
 </tr>
 
 </table>
-    <div><a href="/mealList">MealList</a></div>
+            <!-- <div><a href="/mealList">MealList</a></div> -->
+            <a th:href="@{/mealList(id=${user.id})}">Go to Meal List</a>
 
 
 </div></section>

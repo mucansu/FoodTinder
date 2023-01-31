@@ -7,15 +7,13 @@ import com.example.demo.Repository.MealRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.MealService;
 import com.example.demo.Service.ProfileService;
+import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -31,6 +29,8 @@ public class MealController {
 	private MealRepository mealRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private UserService userService;
 
 
 	@GetMapping("/main/{id}")
@@ -154,20 +154,60 @@ public class MealController {
 		return "matchingMeals"; //Shows the matchingMeals view.
 	}
 
+	//Resetar alla sessionMealLists. Så man kan börja om från början.
 	@GetMapping("/reset")
 	public String resetSession(HttpSession session) {
-		session.removeAttribute("sessionMealList");
-		//session.invalidate(); //Den här rensar sessionen
+		session.removeAttribute("sessionMealList"); //Resetar sessionMealList från session.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //SpringSecurity kod
 		String currentPrincipalName = authentication.getName();//SpringSecurity kod
 		User user = userRepository.findByEmail(currentPrincipalName);//SpringSecurity kod
-		return "redirect:/user/profile/" + user.getId();
+		return "redirect:/user/profile/" + user.getId(); //Visar profilsidan igen.
 	}
 
+	//Visar sidan med mealList
 	@GetMapping("/mealList")
-	public String addMealList(){
+	public String addMealList(Model model, @RequestParam(required = false) Long id){
+		User user = userService.findById(id);
+		model.addAttribute("user", user);
 		return "mealList";
 	}
 
+	//Sätter ihop user och meal objekt med varandra och skickar med modellen.
+	@GetMapping("/addMeal/{id}")
+	public String add(Model model, @PathVariable Long id){
+		User user = userService.findById(id); //Hittar user med hjälp av id.
+		Meal meal = new Meal(); //Skapa ett nytt meal objekt
+		meal.setUser(user); // Sätter ihop meal med user.
+		model.addAttribute("meal", meal);//Skicka meal till thymeleaf
+		return "mealList";
+	}
 
+	//Sparar meal från formuläret i databasen och skickar till mealList templaten.
+	@PostMapping("/saveMeal")
+	public String saveMeal (@ModelAttribute Meal meal){
+		mealService.addMeal(meal); //Sparar meal i databasen
+		return "redirect:/mealList?id=" + meal.getUser().getId();//Skickar tillbaka till /mealList
+	}
+
+	@GetMapping("/editMeal/{id}")
+	public String editMeal(Model model, @PathVariable Long id){
+		Meal meal = mealService.findById(id);
+		model.addAttribute(meal);
+		return "editMealForm";
+	}
+
+	@PostMapping("/saveEditedMeal")
+	public String saveEditedMeal(@RequestParam String mealName, @RequestParam Long id){
+		Meal meal = mealService.findById(id);
+		meal.setMealName(mealName);
+		mealService.addMeal(meal);
+		return "redirect:/mealList?id=" + meal.getUser().getId();
+	}
+
+	@GetMapping("/deleteMeal/{id}")
+	public String deleteMeal(@PathVariable Long id){
+		Meal meal = mealService.findById(id);
+		mealService.deleteById(id); //Raderar meal
+		return "redirect:/mealList?id=" + meal.getUser().getId();//Skickar tillbaka till /mealList
+	}
 }
