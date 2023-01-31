@@ -96,3 +96,7 @@ color: white;
 }
 
 
+.h3 {
+display: inline;
+justify-text: left;
+}

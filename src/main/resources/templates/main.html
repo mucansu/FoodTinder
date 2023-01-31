@@ -7,13 +7,9 @@
 </head>
 
 <body>
-<section class="banner d-flex justify-content-center align-items-center">
-    <div class="container align-center">
-<h1 class="text-center">Hej <span class="text-capitalize" th:text="${session.profile.name}"></span>! Vad vill du äta idag?</h1>
 
-        <div class="nyform">
-            <div class="d-flex justify-content-center">
-                <div>
+    <div class="container nyform mt-3 align-center">
+<h1 class="text-center">Hej <span class="text-capitalize" th:text="${session.profile.name}"></span>! Vad vill du äta idag?</h1>
 
                     <h1 th:text="${meal.mealName}">Hello</h1>
 
@@ -21,12 +17,5 @@
 
                     <a class="choicebutton choicebutton-no"th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=yes'  ">JA</a>
                 </div>
-            </div>
-       </div></div>
-
-
-
-
-</section>
 </body>
 </html>

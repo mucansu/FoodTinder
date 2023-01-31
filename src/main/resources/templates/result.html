@@ -6,16 +6,13 @@
 
 </head>
 <body>
-<section class="banner d-flex justify-content-center align-items-center">
-	<div class="container align-center">
-<h1 class="text-center">Result for <span class="text-capitalize" th:text="${session.profile.name}"></span>:</h1>
-
-		<div class="nyform">
+	<div class="container nyform mt-3 align-center">
+			<h2 class="text-center">Today <span class="text-capitalize" th:text="${session.profile.name}"></span> is craving for...</h2>
 	<!-- render the result of the profiles yesMealList -->
 	<table>
-		<tr th:each="meal : ${yesMealList}">
+	<h3	class="text-capitalize"><tr th:each="meal : ${yesMealList}">
 			<p th:text="${meal.mealName}"></p>
-		</tr>
+		</tr></h3>
 	</table>
 
 	<p><a class="choicebutton choicebutton-no" th:href="'/user/profile/' + ${session.profile.user.id}">Change profile</a></p>
@@ -26,6 +23,6 @@
 
 
 
-</div></section>
+</div>
 </body>
 </html>
