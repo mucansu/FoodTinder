@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>ingenting</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Profile List :</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="profile : ${user.profileList}">
+        <td><a class="choicebutton" th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a></td>
+<!--        <td><a class="button" th:href="'/editMeal/' + ${meal.id}">Edit</a></td>-->
+<!--        <td><a th:href="'/deleteMeal/' + ${meal.id}">delete</a></td>-->
+    </tr>
+    </tbody>
+</table>
+
+<a href="/user/profile/">Done! Back to Profiles</a>
+</body>
+</html>
