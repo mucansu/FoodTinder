@@ -59,10 +59,12 @@ public class ProfileController {
 		return "redirect:/user/profile/" + userId.getId();
 	}
 	@GetMapping("/editProfile")
-	public String editProfile(){
-
+	public String editProfile(@RequestParam Long id,Model model){
+		User user = userService.findById(id);
+	    model.addAttribute("user",user);
 		return "editProfile";
 	}
+
 
 
 

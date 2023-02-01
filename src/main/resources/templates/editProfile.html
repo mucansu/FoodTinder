@@ -16,7 +16,7 @@
     </thead>
     <tbody>
     <tr th:each="profile : ${user.profileList}">
-        <td><a class="choicebutton" th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a></td>
+        <td th:text="${profile.name}"> </td>
 <!--        <td><a class="button" th:href="'/editMeal/' + ${meal.id}">Edit</a></td>-->
 <!--        <td><a th:href="'/deleteMeal/' + ${meal.id}">delete</a></td>-->
     </tr>
