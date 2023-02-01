@@ -46,8 +46,8 @@ public class MealController {
 			session.setAttribute("profile", profile);
 		}
 
-
-		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas.
+		//Hämtar alla måltider som är kopplade till användaren som är inloggad.
+		List<Meal> mealList = mealService.getMealsByUserId(profile.getUser().getId());
 
 		//När mealList.size är nådd ska resultat visas och profiler som har valt sina YES meals sparas i profileList.
 		if (index >= mealList.size()) {

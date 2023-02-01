@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MealRepository extends CrudRepository<Meal,Long> {
 	List<Meal> findByUser(User user);
+	List<Meal> findByUserId (Long userId);
 }

@@ -42,5 +42,8 @@ public class MealService {
 		return meal;
 	}
 
+	public List<Meal> getMealsByUserId(Long userId){
+		return mealRepository.findByUserId(userId);
+	}
 
 }
