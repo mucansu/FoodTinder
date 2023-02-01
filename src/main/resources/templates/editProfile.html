@@ -18,7 +18,7 @@
     <tr th:each="profile : ${user.profileList}">
         <td th:text="${profile.name}"> </td>
 <!--        <td><a class="button" th:href="'/editMeal/' + ${meal.id}">Edit</a></td>-->
-<!--        <td><a th:href="'/deleteMeal/' + ${meal.id}">delete</a></td>-->
+       <td><a th:href="'/user/deleteProfile/' + ${profile.id}">delete</a></td>
     </tr>
     </tbody>
 </table>

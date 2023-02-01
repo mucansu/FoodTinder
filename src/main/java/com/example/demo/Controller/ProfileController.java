@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
 import com.example.demo.Repository.UserRepository;
@@ -65,6 +66,12 @@ public class ProfileController {
 		return "editProfile";
 	}
 
+	@GetMapping("/deleteProfile/{id}")
+	public String deleteMeal(@PathVariable Long id){
+		Profile profile = profileService.findById(id);
+		profileService.deleteById(id); //Raderar profil
+		return "redirect:/user/editProfile?id=" + profile.getUser().getId();//Skickar tillbaka till /mealList
+	}
 
 
 
