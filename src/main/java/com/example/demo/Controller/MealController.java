@@ -40,11 +40,7 @@ public class MealController {
 	                       HttpSession session) {
 
 		//Kollar vilken profil som är inloggad
-		Profile profile = (Profile) session.getAttribute("profile");
-		if (profile == null || profile.getId() != id) {//kolla om gamla profilen är kvar
-			profile = profileService.findById(id);
-			session.setAttribute("profile", profile);
-		}
+		Profile profile = profileService.getProfileFromSession(id, session);
 
 		//Hämtar alla måltider som är kopplade till användaren som är inloggad.
 		List<Meal> mealList = mealService.getMealsByUserId(profile.getUser().getId());

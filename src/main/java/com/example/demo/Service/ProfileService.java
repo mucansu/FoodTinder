@@ -6,6 +6,8 @@ import com.example.demo.Repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class ProfileService {
     @Autowired
@@ -19,5 +21,13 @@ public class ProfileService {
         return profileRepository.findById(id).get();
     }
 
+	public Profile getProfileFromSession(Long id, HttpSession session) {
+		Profile profile = (Profile) session.getAttribute("profile");
+		if (profile == null || profile.getId() != id) { //Kollar om gamla profilen är kvar
+			profile = findById(id);
+			session.setAttribute("profile", profile);
+		}
+		return profile;
+	}
 }
 
