@@ -11,6 +11,12 @@ height:93vh;
 background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url(../images/hero3.png);
 color:white;
 }
+#invalid{
+color:red;
+}
+#register{
+margin-top:20px;
+}
 .my-card{
 padding:20px;
 background:#ffffff;

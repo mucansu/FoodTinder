@@ -25,7 +25,7 @@
 
     <form th:action="@{/dologin}" method="post">
         <div th:if="${param.error}">
-            <h4>Invalid username and password</h4>
+            <h4 id="invalid">Invalid username and password</h4>
 
         </div>
         <div class="mb-3">
@@ -42,6 +42,8 @@
         <button type="submit" class="choicebutton choicebutton-no">Login</button>
 
     </form>
+            </div>
+        </div>
 
 </section>
 

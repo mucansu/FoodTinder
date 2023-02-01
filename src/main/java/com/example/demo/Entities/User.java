@@ -1,11 +1,10 @@
 package com.example.demo.Entities;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +14,20 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+
+	@NotBlank(message = "User name should not be empty")
+	@Size(max = 15, message = "Username should not be more than 15 characters")
 	private String userName;
+	@NotBlank(message = "First name should not be empty")
+	@Size (max = 15, message = "Name should not be more than 15 characters")
 	private String firstName;
+	@NotBlank(message = "Last name should not be empty")
+	@Size (max = 15, message = "Name should not be more than 15 characters")
 	private String lastName;
+	@NotBlank(message = "Email field should not be empty")
+	@Column(unique = true)
 	private String email;
+	@NotBlank(message = "Password field should not be empty")
 	private String password;
 	private String role;
 
