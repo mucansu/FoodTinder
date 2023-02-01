@@ -58,6 +58,11 @@ public class ProfileController {
 		profileService.addProfile(profile);
 		return "redirect:/user/profile/" + userId.getId();
 	}
+	@GetMapping("/editProfile")
+	public String editProfile(){
+
+		return "editProfile";
+	}
 
 
 
