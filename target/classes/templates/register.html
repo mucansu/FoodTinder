@@ -19,38 +19,26 @@
     </form>-->
 
 	<!--Register Form-->
-	<section class="banner d-flex justify-content-center align-items-center">
+	<section class="banner d-flex justify-content-center align-items-center" id="register">
 		<div class="container nyform align-center row registerform">
 			<h1 class="text-center">Register here! </h1>
 			<div class="col-md-6">
-				<!--	<div class="my-card mt-2"> --><!-- mt means margin top -->
-				<!-- to send the alert message in case of success or wrong entry -->
-				<!--th:if is used to show message in case of error -->
-				<!--th:classappend type is used to show the type of message. alert in the next class will show the message type -->
-				<!--<div  th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">-->
-				<!--to show the content of the message in the controller -->
-				<!--	<p class="text-center" th:text="${session.message.content}"></p>-->
-				<!-- message will be seen for one time and then it will be removed -->
 
-
-				<!--	</div>-->
-				<!--to insert an image, use img tab. to center the image use a div and write text-center-->
-				<!--	<div class="container text-center">
-						<img style="width:60px;" src=""th:src="@{/img/membership.png}" alt="">
-					</div>-->
 				<form  method="post" th:action="@{/register}" th:object="${user}">
 					<!--name field -->
 					<div class="mb-3">
 						<label for="name_field" class="form-label">User Name</label>
 						<input type="text"
+							   th:value="${user.userName}"
+							   th:field="*{userName}"
 							   name="userName"
+							   th:classappend="${#fields.hasErrors('userName')?'is-invalid':''}"
 							   class="form-control"
 							   id="name_field"
 							   aria-describedby="emailHelp"
-							   placeholder="Please pick a username"
-							   required
+							   placeholder="Please pick a username" >
 
-							   th:value="${user.userName}">
+						<div th:each="e:${#fields.errors('userName')}" th:text="${e}" class="invalid-feedback"></div>
 						<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
 
 					</div>
@@ -60,13 +48,14 @@
 						<label for="name_field" class="form-label">First name</label>
 						<input type="text"
 							   name="firstName"
+							   th:field="*{firstName}"
+							   th:value="${user.firstName}"
+							   th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}"
 							   class="form-control"
 
 							   aria-describedby="emailHelp"
-							   placeholder="First name"
-							   required
-
-							   th:value="${user.firstName}">
+							   placeholder="First name">
+						<div th:each="e:${#fields.errors('firstName')}" th:text="${e}" class="invalid-feedback"></div>
 						<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
 
 					</div>
@@ -78,12 +67,12 @@
 						<input type="text"
 							   name="lastName"
 							   class="form-control"
-
+							   th:field="*{lastName}"
+							   th:value="${user.lastName}"
+							   th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}"
 							   aria-describedby="emailHelp"
-							   placeholder="Last name"
-							   required
-
-							   th:value="${user.lastName}">
+							   placeholder="Last name">
+						<div th:each="e:${#fields.errors('lastName')}" th:text="${e}" class="invalid-feedback"></div>
 						<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
 
 					</div>
@@ -94,25 +83,28 @@
 						<label for="email_field" class="form-label">Email</label>
 						<input type="email"
 							   name="email"
+							   th:value="${user.email}"
+							   th:field="*{email}"
+							   th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
 							   class="form-control"
 							   id="email_field"
 							   aria-describedby="emailHelp"
-							   placeholder="Email"
-							   required
-							   th:value="${user.email}">
+							   placeholder="Email">
+						<div th:each="e:${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"></div>
 					</div>
 					<!--password field -->
 					<div class="mb-3">
 						<label for="password_field" class="form-label">Password</label>
 						<input type="password"
 							   name="password"
+							   th:value="${user.password}"
+							   th:field="*{password}"
+							   th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
 							   class="form-control"
 							   id="password_field"
 							   aria-describedby="emailHelp"
-							   placeholder="Pick a password"
-							   required
-							   th:value="${user.password}"
-						>
+							   placeholder="Pick a password">
+						<div th:each="e:${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"></div>
 					</div>
 
 
@@ -131,7 +123,7 @@
 
 			</div>
 
-		</div>
+
 
 	</div>
 
