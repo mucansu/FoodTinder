@@ -5,23 +5,87 @@ font-family: 'Roboto Slab', sans-serif;
 .bg-primary{
 background: #000000 !important;
 }
-.banner{
-width:100%;
-height:93vh;
-background:radial-gradient(rgba(0,35,68,.5),rgba(0,35,68,.5)),url(../images/hero3.png);
-color:white;
-}
 
-.banner-2{
+.banner {
 width:100%;
 height:93vh;
 background: radial-gradient(rgba(0,35,68,-8),rgba(0,35,68,0.5)),url(../images/hero5.png);
-color:white;
+display: flex;
+    justify-content: center;
+        flex-direction: column;
 }
 
-#invalid{
-color:red;
+.fknbox {
+         cursor: pointer;
+         text-align: center;
+         display: flex;
+         width: 50%;
+         height: 60%;
+         background: white;
+         border-radius: 0px;
+         border: 5px solid black;
+         transition: all .2s;
+         box-color: black;
+         box-shadow: 10px 10px 0px 0px;
+         color: black;
+             flex-wrap: wrap;
+             align-content: center;
+                 flex-direction: column;
+                 align-items: center;
+                 justify-content: center;
+
+        }
+
+        .nav-link {
+        color: black;
+
+        }
+
+.navbar {
+  background: white;
+          border-radius: 0px;
+          border-bottom: 5px solid black;
+          color: black;
+ }
+
+ .show {
+ text-align: end;
+ }
+
+
+        .fknbox:hover {
+         box-shadow: -10px 10px 0px 0px;
+        }
+
+
+.btn {
+  border: 2px solid black;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+      margin: 10px; /* lagt till 20px istället för 10 */
+      border-radius: 0px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: ease .3s;
+      box-shadow: 2px 2px 2px 0px black;
 }
+
+
+.btn:hover,
+.btn:focus {
+ box-shadow: -2px 2px 0px 0px;
+ }
+
+
+.btn-gul {
+  color: black;
+  background: #FFED00;
+}
+
+.btn-gul:hover {
+background: #E61F93;
+}
+
 #register{
 margin-top:20px;
 }
@@ -51,6 +115,7 @@ background:#ffffff;
 }
 
 a {
+color: black;
 text-decoration: none;
 }
 
@@ -64,47 +129,33 @@ text-decoration: none;
     box-shadow: 12px 12px 2px 1px black;
 }
 
+.nyform {
+background: WHITE;
+text-align: center;
+    border: 5px solid black;
+    box-shadow: 12px 12px 2px 1px black;
+}
+
+
+.nyform-home {
+    width: 60%;
+    margin: 40px auto;
+    background: WHITE;
+    padding: 80px;
+    text-align: center;
+    border: 5px solid black;
+    box-shadow: 12px 12px 2px 0px black;
+}
+
+
 .nyform-blue {
 background: #DAEDFF;
-padding: 2rem;
-width: 60%;
+padding: 1rem;
+width: 50%;
     margin: 60px auto;
     border: 5px solid black;
     box-shadow: 12px 12px 2px 1px black;
 
-}
-
-button {
-    border-radius: 0px;
-}
-
-.choicebutton {
-    display: inline-block;
-    padding: 12px 24px;
-    margin: 20px; /* lagt till 20px istället för 10 */
-    font-weight: bold;
-    color: black;
-    border: 2px solid black;
-    box-shadow: 3px 3px 1px 1px black;
-    outline: none;
-    border-radius: 0px;
-    cursor: pointer;
-    transition: ease .3s;
-}
-
-.choicebutton-yes {
-background: #FFED00;
-}
-
-.choicebutton-no {
-background: #E61F93;
-color: white;
-}
-
-
-.choicebutton:hover {
-    background: #FAA94A;
-    color: black;
 }
 
 .registerform .form-control:focus {
@@ -125,9 +176,21 @@ display: inline;
 justify-text: left;
 }
 
-.minigul {
-        height: 10%;
-        width: 10%;
-        background: url(../images/mini-gul.png);
-        display: block;
+
+
+        .card-meal {
+         cursor: pointer;
+         width: 40%;
+         height: 60%;
+         background: white;
+         border-radius: 0px;
+         border: 5px solid black;
+         transition: all .2s;
+         box-color: black;
+         box-shadow: 10px 10px 0px 0px;
+         color: black;
+        }
+
+        .card-meal:hover {
+         box-shadow: -10px 10px 0px 0px;
         }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,8 +8,7 @@
 </head>
 
 <body>
-<section class="banner2 d-flex justify-content-center align-items-center">
-    <div class="container nyform mt-3 align-center">
+<section class="navbar nd-flex card-meal mt-3 justify-content-center align-items-center">
 <h2 class="text-center">Hi <span class="text-capitalize" th:text="${session.profile.name}"></span>! What are you craving today?</h2><br>
 
                     <h1 class="text-capitalize font-weight-bold" th:text="${meal.mealName} + '?'">Hello</h1><br><br>
@@ -16,6 +16,7 @@
                     <a class="choicebutton choicebutton-no" th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=no'  ">NO</a>
 
                     <a class="choicebutton choicebutton-yes" th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=yes'  ">YES!</a>
-    </div></section>
+</section>
 </body>
 </html>
+

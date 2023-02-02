@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
-<head>
-    <meta charset="UTF-8">
-    <title>FoodAlong</title>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+    <meta charset="ISO-8859-1">
+    <title>Food Along!</title>
 </head>
 <body>
 
-<section class="banner2 d-flex justify-content-center align-items-center">
-    <div class="container nyform align-center">
+<div th:replace="main2 ::html_header"></div>
 
-    <h1 class="font-weight-bold mb-0">Get along - with FoodAlong</h1>
 
-        <a class="choicebutton choicebutton-yes" href="/register">Get Started</a>
-  <!--  <p><a href="/register">Get Started</a></p>-->
-    </div>
-</section>
+<div class="banner">
+    <div class="fknbox mx-auto">
+        <div class="font-weight-bold px-2"><h1>Get along - with FoodAlong</h1></div>
 
+        <a class="btn btn-gul p-3" href="/register">Get Started</a>
+    </div></div>
+
+
+
+
+
+
+<div th:replace="main2 ::html_footer"></div>
 </body>
 </html>
