@@ -14,13 +14,12 @@ display: flex;
     justify-content: center;
         flex-direction: column;
 }
-
 .fknbox {
          cursor: pointer;
          text-align: center;
          display: flex;
          width: 50%;
-         height: 60%;
+         min-height: 60%;
          background: white;
          border-radius: 0px;
          border: 5px solid black;
@@ -34,6 +33,9 @@ display: flex;
                  align-items: center;
                  justify-content: center;
 
+        }
+
+        .fknbox-register {
         }
 
         .nav-link {
@@ -157,6 +159,10 @@ width: 50%;
     box-shadow: 12px 12px 2px 1px black;
 
 }
+.form-control {
+
+    display: unset;
+    }
 
 .registerform .form-control:focus {
     background-color: #daedff;
