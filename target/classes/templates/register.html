@@ -20,10 +20,9 @@
 
 	<!--Register Form-->
 	<section class="banner d-flex justify-content-center align-items-center" id="register">
-		<div class="container nyform align-center row registerform">
+		<div class="container nyform-blue align-center row registerform">
 			<h1 class="text-center">Register here! </h1>
-			<div class="col-md-6">
-
+			<div>
 				<form  method="post" th:action="@{/register}" th:object="${user}">
 					<!--name field -->
 					<div class="mb-3">
