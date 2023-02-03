@@ -188,7 +188,7 @@ width: 50%;
 
 }
 .form-control {
-
+border-radius: none;
     display: unset;
     }
 

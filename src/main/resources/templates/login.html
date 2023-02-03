@@ -7,22 +7,13 @@
 <body>
 
 <div th:replace="main2 ::html_header"></div>
-    <!--
-<div th:if="${param.error}">
-    <h4>Invalid username and password</h4>
-</div>
-<form th:action="@{/dologin}" method="post">-->
 
-    <!--
-      Email:<input type="email" name="username"><br>--> <!--th:value="${user.userName}"-->
-    <!--  Password: <input type="password" name="password"><br>--> <!--th:value="${user.password}"-->
-    <!-- <input type="submit" value="Login">
-   </form> -->
-    <!--Bootstrap form-->
-    <section class="banner2 d-flex justify-content-center align-items-center">
-        <div class="container nyform align-center row registerform">
+
+<div class="banner m-auto">
+    <div class="fknbox py-3 px-3 mt-2 m-auto justify-content-center">
+
             <h1 class="text-center">Login-along below!</h1><br>
-            <div class="col-md-6">
+            <div class="col-md-6 registerform justify-content-center">
 
     <form th:action="@{/dologin}" method="post">
         <div th:if="${param.error}">
@@ -40,7 +31,7 @@
         </div>
 
 
-        <button type="submit" class="choicebutton choicebutton-no">Login</button>
+        <button type="submit" class="btn btn-green h3">Login</button>
 
     </form>
             </div>
