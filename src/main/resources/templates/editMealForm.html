@@ -5,8 +5,16 @@
 	<title>Edit Meal</title>
 </head>
 <body>
-<center>
-	<h1>Edit item</h1>
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+	<meta charset="ISO-8859-1">
+	<title>Food Along!</title>
+</head>
+<body>
+
+<div th:replace="main2 ::html_header"></div>
+	<h1>Edit Meals</h1>
 
 	<form action="/saveEditedMeal" method="POST" >
 		<input type="hidden" name="id" th:value="${meal.id}">
@@ -14,6 +22,5 @@
 		<input type="submit" value="Save Meal">
 	</form>
 
-</center>
 </body>
 </html>
