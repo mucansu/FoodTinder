@@ -9,11 +9,11 @@
 <div th:replace="main2 ::html_header"></div>
 
 
-<div class="banner">
-	<div class="fknbox py-3 px-3 m-auto justify-content-center">
+<div class="banner m-auto">
+	<div class="fknbox py-3 px-3 mt-2 m-auto justify-content-center">
 		<form method="post" th:action="@{/register}" th:object="${user}">
 			<!--name field -->
-
+			<div class="mb-3 mt-5"> <h1>Register here!</h1></div>
 		<div class="mb-3">
 				<label for="name_field" class="form-label">User Name</label>
 				<input type="text"
@@ -98,12 +98,10 @@
 
 
 			<!--creating buttons for submit and login -->
-			<div class="row justify-content-center">
+			<div class="row justify-content-center align-items-normal">
 				<button type="submit" class="btn btn-gul col-5">
 					Submit
-				</button></div>
-			<div class="row justify-content-center">
-				<a class="btn col-3" href="login">Go to Login</a>
+				</button><a class="btn col-5" href="login">Go to Login</a></div>
 
 			</div>
 

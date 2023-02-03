@@ -35,6 +35,16 @@ display: flex;
 
         }
 
+        .fknbox2 {
+                 background: white;
+                 border-radius: 0px;
+                 border: 5px solid black;
+                 transition: all .2s;
+                 box-color: black;
+                 box-shadow: 10px 10px 0px 0px;
+                 color: black;
+                }
+
         .fknbox-register {
         }
 
@@ -83,10 +93,29 @@ display: flex;
   color: black;
   background: #FFED00;
 }
-
 .btn-gul:hover {
 background: #E61F93;
 }
+
+.btn-rosa {
+  color: white;
+  background: #E61F93;
+}
+.btn-rosa:hover {
+background: #FAA94A;
+color: black;
+}
+
+.btn-green {
+color: white;
+background: #FAA94A;
+}
+
+.btn-green:hover {
+background: white;
+}
+
+
 
 #register{
 margin-top:20px;
@@ -105,16 +134,15 @@ background:#ffffff;
     border: 5px solid black;
     box-shadow: 12px 12px 2px 1px black;
 }
-
+/*
 .container {
-    background-color: #DAEDFF;
     align-items: center;
     justify-content: center;
     color: black;
    padding-top: 3rem;
    padding-bottom: 3rem;
 
-}
+}*/
 
 a {
 color: black;
