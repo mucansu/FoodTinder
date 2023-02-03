@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+    <meta charset="ISO-8859-1">
+    <title>Food Along!</title>
 </head>
 <body>
 
-    <section class="nyform banner-2 container align-center">
-            <h1 class="text-center">Hi <span class="text-capitalize" th:text="${user.firstName}"></span>!</h1><br><p>Enter your family members below!</p>
-<form action="/user/saveProfile" method="post">
-    <input type="hidden" name="user" th:value="${user.id}">
-    Profile Name <input name="name" type="text"> <br>
-    <button type="submit" class="choicebutton choicebutton-yes">Add profile</button>
-</form>
+<div th:replace="main2 ::html_header"></div>
 
-    <table>
- <tr th:each="profile : ${user.profileList}">
-     <a class="choicebutton" th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
+<div class="banner">
+    <div class="fknbox mx-auto">
+<div class="container">
+        <h1 class="text-center">Hi <span class="text-capitalize" th:text="${user.firstName}"></span>!</h1><br><p>Enter your family members below!</p>
+        <form action="/user/saveProfile" method="post">
+            <input type="hidden" name="user" th:value="${user.id}">
+            Profile Name <input name="name" type="text"> <br>
+            <button type="submit" class="btn btn-gul">Add profile</button>
+        </form>
+</div>
+        <div class="container">
+        <table>
+            <tr th:each="profile : ${user.profileList}">
+                <a class="btn" th:href="'/main/' + ${profile.id}" th:text="${profile.name}"></a>
 
-</tr>
+            </tr>
 
-</table>
-            <!-- <div><a href="/mealList">MealList</a></div> -->
-            <a th:href="@{/mealList(id=${user.id})}">Go to Meal List</a>
-            <a th:href="@{/user/editProfile(id=${user.id})}">Edit Profile</a>
+        </table>
+        <!-- <div><a href="/mealList">MealList</a></div> -->
+        <a th:href="@{/mealList(id=${user.id})}">Go to Meal List</a>
+        <a th:href="@{/user/editProfile(id=${user.id})}">Edit Profile</a>
 
 
-</section>
+    </div></div>
 
+
+
+
+
+    </div></div>
+
+
+
+
+
+
+<div th:replace="main2 ::html_footer"></div>
 </body>
 </html>
