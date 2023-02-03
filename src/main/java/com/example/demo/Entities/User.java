@@ -40,6 +40,17 @@ public class User {
 
 	}
 
+	public User(Long id, String userName) {
+		this.id = id;
+		this.userName = userName;
+	}
+
+	public User(String userName, String firstName, String lastName, String email) {
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
 
 	public User(Long id, String userName, String firstName, String lastName, String email,
 				String password, String role, List<Profile> profileList, List<Meal> userMealList) {
