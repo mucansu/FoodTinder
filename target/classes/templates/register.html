@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+	<meta charset="ISO-8859-1">
+	<title>Food Along!</title>
+</head>
+<body>
+
+<div th:replace="main2 ::html_header"></div>
+
+
+<div class="banner m-auto">
+	<div class="fknbox py-3 px-3 mt-2 m-auto justify-content-center">
+		<form method="post" th:action="@{/register}" th:object="${user}">
+			<!--name field -->
+			<div class="mb-3 mt-5"> <h1>Register here!</h1></div>
+		<div class="mb-3">
+				<label for="name_field" class="form-label">User Name</label>
+				<input type="text"
+					   th:value="${user.userName}"
+					   th:field="*{userName}"
+					   name="userName"
+					   th:classappend="${#fields.hasErrors('userName')?'is-invalid':''}"
+					   class="form-control"
+					   id="name_field"
+					   aria-describedby="emailHelp"
+					   placeholder="Please pick a username" >
+
+				<div th:each="e:${#fields.errors('userName')}" th:text="${e}" class="invalid-feedback"></div>
+				<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
+
+			</div>
+			<!--First Name field-->
+
+			<div class="mb-3">
+				<label for="name_field" class="form-label">First name</label>
+				<input type="text"
+					   name="firstName"
+					   th:field="*{firstName}"
+					   th:value="${user.firstName}"
+					   th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}"
+					   class="form-control"
+
+					   aria-describedby="emailHelp"
+					   placeholder="First name">
+				<div th:each="e:${#fields.errors('firstName')}" th:text="${e}" class="invalid-feedback"></div>
+				<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
+
+			</div>
+
+			<!--Last Name field-->
+
+			<div class="mb-3">
+				<label for="name_field" class="form-label">Last name</label>
+				<input type="text"
+					   name="lastName"
+					   class="form-control"
+					   th:field="*{lastName}"
+					   th:value="${user.lastName}"
+					   th:classappend="${#fields.hasErrors('lastName')?'is-invalid':''}"
+					   aria-describedby="emailHelp"
+					   placeholder="Last name">
+				<div th:each="e:${#fields.errors('lastName')}" th:text="${e}" class="invalid-feedback"></div>
+				<!-- now if user add some values in each field it will be added to that th: value filed. this line is for the above th:value -->
+
+			</div>
+
+
+			<!--email field -->
+			<div class="mb-3">
+				<label for="email_field" class="form-label">Email</label>
+				<input type="email"
+					   name="email"
+					   th:value="${user.email}"
+					   th:field="*{email}"
+					   th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+					   class="form-control"
+					   id="email_field"
+					   aria-describedby="emailHelp"
+					   placeholder="Email">
+				<div th:each="e:${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"></div>
+			</div>
+			<!--password field -->
+			<div class="mb-3">
+				<label for="password_field" class="form-label">Password</label>
+				<input type="password"
+					   name="password"
+					   th:value="${user.password}"
+					   th:field="*{password}"
+					   th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
+					   class="form-control"
+					   id="password_field"
+					   aria-describedby="emailHelp"
+					   placeholder="Pick a password">
+				<div th:each="e:${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"></div>
+			</div>
+
+
+
+			<!--creating buttons for submit and login -->
+			<div class="row justify-content-center align-items-normal">
+				<button type="submit" class="btn btn-gul col-5">
+					Submit
+				</button><a class="btn col-5" href="login">Go to Login</a></div>
+
+			</div>
+
+
+		</form>
+
+
+	</div></div>
+
+
+
+
+<div th:replace="main2 ::html_footer"></div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+    <meta charset="ISO-8859-1">
+    <title>Food Along!</title></head>
+<body>
+<div th:replace="main2 ::html_header"></div>
+<div class="banner">
+    <div class="fknbox mx-auto"><h2 class="text-center">Hi <span class="text-capitalize"
+                                                                 th:text="${session.profile.name}"></span>! What are you
+        craving today?</h2><br>
+        <h1 class="btn fs-1  p-4 text-capitalize font-weight-bold" th:text="${meal.mealName} + '?'">Hello</h1><br><br>
+        <div class="flex-row"><a class="btn btn-rosa fs-2"
+                                 th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=no'  ">NO</a>
+            <a class="btn btn-green fs-2"
+               th:href="'/main/' + ${session.profile.id} + '?index=' + ${mealIndex} + '&choice=yes'  ">YES!</a></div>
+    </div>
+</div>
+</body>
+</html>

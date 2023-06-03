@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+    <meta charset="ISO-8859-1">
+    <title>Food Along!</title>
+</head>
+<body>
+
+<div th:replace="main2 ::html_header"></div>
+
+
+<div class="banner m-auto">
+    <div class="fknbox py-3 px-3 mt-2 m-auto justify-content-center">
+
+            <h1 class="text-center">Login-along below!</h1><br>
+            <div class="col-md-6 registerform justify-content-center">
+
+    <form th:action="@{/dologin}" method="post">
+        <div th:if="${param.error}">
+            <h4 id="invalid">Invalid username and password</h4>
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+
+
+        <button type="submit" class="btn btn-green h3">Login</button>
+
+    </form>
+            </div>
+        </div>
+
+</section>
+
+</body>
+</html>

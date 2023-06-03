@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8">
+	<title>Hej</title>
+
+</head>
+<body>
+	<section class="container nyform mt-3 align-center">
+			<h2 class="text-center">Today <span class="text-capitalize" th:text="${session.profile.name}"></span> is craving for...</h2>
+
+		<div class="minigul"></div>
+	<!-- render the result of the profiles yesMealList -->
+	<table style="width:100%;">
+
+
+	<tr th:each="meal : ${yesMealList}">
+		<td>
+			<h3 class="text-capitalize text-center"> <span th:text="${meal.mealName}"></span></h3></td>
+		</tr>
+	</table>
+<p></p>
+	<p><a class="btn btn-rosa fs-3" th:href="'/user/profile/' + ${session.profile.user.id}">Change profile</a></p>
+
+	<!-- If profileList.size is greater than 0 then the matchingMeals link will show -->
+	<p th:if="${profileList.size() > 1}"><a class="btn btn-gul fs-3" th:href="@{/matchingMeals}">See matching meals</a></p>
+</section>
+
+</body>
+</html>

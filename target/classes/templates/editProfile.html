@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="main2 ::html_headtag">
+    <meta charset="ISO-8859-1">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+<div th:replace="main2 ::html_header"></div>
+<section class="nyform banner container align-center registerform">
+<h1>Edit Profiles</h1>
+<table>
+    <thead>
+    <tr>
+
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="profile : ${user.profileList}" class="fs-4">
+        <td th:text="${profile.name}"> </td>
+<!--        <td><a class="button" th:href="'/editMeal/' + ${meal.id}">Edit</a></td>-->
+       <td><a th:href="'/user/deleteProfile/' + ${profile.id}" class="btn btn-gul">delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/user/profile/" class="btn fs-3">Done! Back to Profiles</a>
+</section>
+</body>
+</html>

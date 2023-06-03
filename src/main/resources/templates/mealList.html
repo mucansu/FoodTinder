@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8">
+	<title>Meal List</title>
+</head>
+<body>
+<div th:replace="main2 ::html_header"></div>
+
+<section class="nyform banner container align-center registerform">
+	<h1 class="text-center"> Add Meals to Your Meal list </h1>
+
+	<!--FORM för att lägga till ett meal i en userMealList-->
+	<form action="/saveMeal" method="POST">
+		<input type="hidden" name="user" th:value="${user.id}">
+		<input type="text" name="mealName" class="registerform form-control" placeholder="Please add your new meal here"/>
+		<button type="submit" class="btn">Add Meal</button>
+	</form>
+
+	<!--TABLE visar alla meals som finns för user-->
+	<div class="m-2"><table class="registerform">
+		<thead>
+		<tr>
+			<th>This Meal List Contains:</th>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody class="text-start">
+		<tr th:each="meal : ${user.userMealList}" >
+			<td th:text="${meal.mealName}" class="fs-4"></td>
+
+			<td><a th:href="'/deleteMeal/' + ${meal.id}" class="btn btn-gul">delete</a></td>
+
+			<td><a th:href="'/editMeal/' + ${meal.id}" class="btn btn-gul">Edit</a></td>
+		</tr>
+		<br>
+		<br>
+
+		</tbody>
+	</table>
+	</div>
+	<a class="btn  fs-3" href="/user/profile/">Done! Back to Profiles</a>
+
+</section>
+</body>
+</html>
+

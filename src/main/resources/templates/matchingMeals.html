@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8">
+	<title>Match!</title>
+
+
+
+</head>
+<body>
+<section class="banner d-flex justify-content-center align-items-center">
+	<div class="nyform container align-center">
+		<h1 class="text-center">It's a match!</h1><br>
+		<h3 class="text-left text-capitalize" th:each="meal : ${mealListById}">
+			<p th:text="${meal.mealName}"></p>
+		</h3>
+	<br><br>
+<a class="btn btn-rosa fs-3" href="/reset/">Reset Session</a>
+		<div>
+
+</body>
+</html>
