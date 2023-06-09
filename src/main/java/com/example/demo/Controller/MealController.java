@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
+import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.MealRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.MealService;
@@ -172,19 +173,19 @@ public class MealController {
 
 	@GetMapping("/editMeal/{id}")
 	public String editMeal(Model model, @PathVariable Long id){
-		Optional<Meal> meal = mealService.findById(id);
-		model.addAttribute(meal);
-		return "editMealForm";
+		Optional<Meal> optionalMeal = mealService.findById(id);
+		optionalMeal.ifPresent(model::addAttribute);
+			return "editMealForm";
+		//handle error when meal not found
 	}
 
 	@PostMapping("/saveEditedMeal")
 	public String saveEditedMeal(@RequestParam String mealName, @RequestParam Long id){
-		Optional<Meal> optionalMeal = mealService.findById(id);
+		Optional<Meal> optionalMeal = Optional.ofNullable(mealService.findById(id).orElseThrow(() -> new RecordNotFoundException("Meal not found for name: " + mealName)));
 
 		if(!optionalMeal.isPresent()) {
 			// Handle the case where the meal is not found.
-			// This could be a redirect to an error page, or logging and returning a default page.
-			return "redirect:/error";
+			throw new RecordNotFoundException("No meal found with name: " + mealName);
 		}
 
 		Meal meal = optionalMeal.get();
