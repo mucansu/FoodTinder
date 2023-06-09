@@ -21,16 +21,21 @@ import java.util.stream.Collectors;
 
 @Controller
 public class MealController {
+	private final MealService mealService;
+	private final ProfileService profileService;
+	private final UserService userService;
 	@Autowired
-	private MealService mealService;
-	@Autowired
-	private ProfileService profileService;
+	public MealController(MealService mealService, ProfileService profileService, UserService userService){
+		this.mealService = mealService;
+		this.profileService = profileService;
+		this.userService = userService;
+	}
+
 	@Autowired
 	private MealRepository mealRepository;
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private UserService userService;
+
 
 
 	@GetMapping("/main/{id}")
@@ -167,22 +172,39 @@ public class MealController {
 
 	@GetMapping("/editMeal/{id}")
 	public String editMeal(Model model, @PathVariable Long id){
-		Meal meal = mealService.findById(id);
+		Optional<Meal> meal = mealService.findById(id);
 		model.addAttribute(meal);
 		return "editMealForm";
 	}
 
 	@PostMapping("/saveEditedMeal")
 	public String saveEditedMeal(@RequestParam String mealName, @RequestParam Long id){
-		Meal meal = mealService.findById(id);
+		Optional<Meal> optionalMeal = mealService.findById(id);
+
+		if(!optionalMeal.isPresent()) {
+			// Handle the case where the meal is not found.
+			// This could be a redirect to an error page, or logging and returning a default page.
+			return "redirect:/error";
+		}
+
+		Meal meal = optionalMeal.get();
 		meal.setMealName(mealName);
 		mealService.addMeal(meal);
+
 		return "redirect:/mealList?id=" + meal.getUser().getId();
 	}
 
+
 	@GetMapping("/deleteMeal/{id}")
 	public String deleteMeal(@PathVariable Long id){
-		Meal meal = mealService.findById(id);
+		Optional<Meal> meal2 = mealService.findById(id);
+		if(!meal2.isPresent()) {
+			// Handle the case where the meal is not found.
+			// This could be a redirect to an error page, or logging and returning a default page.
+			return "redirect:/error";
+		}
+
+		Meal meal = meal2.get();
 		mealService.deleteById(id); //Raderar meal
 		return "redirect:/mealList?id=" + meal.getUser().getId();//Skickar tillbaka till /mealList
 	}

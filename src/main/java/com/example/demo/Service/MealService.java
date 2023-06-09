@@ -9,16 +9,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MealService {
     @Autowired
     private MealRepository mealRepository;
+	public Optional<Meal> findById(Long id){
+		return mealRepository.findById(id);
+	}
 
-
-    public Meal findById(Long id){
-        return mealRepository.findById(id).get();
-    }
+//    public Meal findById(Long id){
+//        return mealRepository.findById(id).get();
+//    }
 
 
 	public List<Meal> findAll() {

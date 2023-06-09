@@ -1,0 +1,12 @@
+version: "3"
+services:
+  database:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: FoodAlong
+      MYSQL_USER: mustafa
+      MYSQL_PASSWORD: 2131
+    ports:
+      - "8088:3306"
