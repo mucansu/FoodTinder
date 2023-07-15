@@ -94,7 +94,7 @@ public class MealController {
 
 		//Hittar namnet på alla de ID:n som föregående funktion har hittat med högst keyvalue.
 		//Vi behöver ha namnet på alla meals och i HASHMAPPEN Ovan så kollar vi endast ID.
-		List<Meal> mealList = mealService.findAll(); //Tar alla måltider från databas (så den kan hitta namnet på de ID som har fått match)
+		List<Meal> mealList = (List<Meal>) mealService.findAll(); //Tar alla måltider från databas (så den kan hitta namnet på de ID som har fått match)
 		List<Meal> mealListById = mealList.stream()
 				                          .filter(meal -> matchedMealsIds.contains(meal.getId())) //Filters meaList and returns mealListById that contain the meals whose id matches the id in matchedMealsIds.
 				                          .collect(Collectors.toList()); //Collects all the filtered meals to a list.
@@ -116,7 +116,7 @@ public class MealController {
 	//Visar sidan med mealList
 	@GetMapping("/mealList")
 	public String addMealList(Model model, @RequestParam(required = false) Long id){
-		User user = userService.findById(id);
+		User user = (User) userService.findById(id);
 		model.addAttribute("user", user);
 		return "mealList";
 	}
@@ -124,7 +124,7 @@ public class MealController {
 	//Sätter ihop user och meal objekt med varandra och skickar med modellen.
 	@GetMapping("/addMeal/{id}")
 	public String add(Model model, @PathVariable Long id){
-		User user = userService.findById(id); //Hittar user med hjälp av id.
+		User user = (User) userService.findById(id); //Hittar user med hjälp av id.
 		Meal meal = new Meal(); //Skapa ett nytt meal objekt
 		meal.setUser(user); // Sätter ihop meal med user.
 		model.addAttribute("meal", meal);//Skicka meal till thymeleaf
@@ -134,13 +134,13 @@ public class MealController {
 	//Sparar meal från formuläret i databasen och skickar till mealList templaten.
 	@PostMapping("/saveMeal")
 	public String saveMeal (@ModelAttribute Meal meal){
-		mealService.addMeal(meal); //Sparar meal i databasen
+		mealService.save(meal); //Sparar meal i databasen
 		return "redirect:/mealList?id=" + meal.getUser().getId();//Skickar tillbaka till /mealList
 	}
 
 	@GetMapping("/editMeal/{id}")
 	public String editMeal(Model model, @PathVariable Long id){
-		Meal meal = mealService.findById(id);
+		Meal meal = (Meal) mealService.findById(id);
 
 		model.addAttribute("meal", meal);
 		return "editMealForm";
@@ -148,17 +148,17 @@ public class MealController {
 
 	@PostMapping("/saveEditedMeal")
 	public String saveEditedMeal(@RequestParam String mealName, @RequestParam Long id){
-		Meal meal = mealService.findById(id);
+		Meal meal = (Meal) mealService.findById(id);
 
 		meal.setMealName(mealName);
-		mealService.addMeal(meal);
+		mealService.save(meal);
 		return "redirect:/mealList?id=" + meal.getUser().getId();
 	}
 
 
 	@GetMapping("/deleteMeal/{id}")
 	public String deleteMeal(@PathVariable Long id){
-		Meal meal = mealService.findById(id);
+		Meal meal = (Meal) mealService.findById(id);
 					mealService.deleteById(id);
 		return "redirect:/mealList?id=" + meal.getUser().getId();
 	}

@@ -42,7 +42,7 @@ public class UserController {
 		model.addAttribute("user", user);
 		user.setPassword(bp.encode(user.getPassword()));
 		user.setRole("ROLE_USER");
-		userService.addUser(user);
+		userService.save(user);
 		return "redirect:/user/profile/";
 	}
 

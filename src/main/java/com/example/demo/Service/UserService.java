@@ -5,26 +5,20 @@ import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 @Service
-public class UserService {
+public class UserService extends BaseService{
     //public UserDetailsService getUsernamePassword;
     @Autowired
    private UserRepository userRepository;
-    public User addUser(User user){
-      return userRepository.save(user);
+
+    @Override
+    protected CrudRepository<User,Long> getRepository() {
+        return userRepository;
     }
 
-    public User findById(Long id){
-        return userRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("User not found"));
-    }
-
-   public User findUserName(String userName){
-        return userRepository.findByUserName(userName);
-   }
-
- // public User findByUsername(String userName){
+    // public User findByUsername(String userName){
    //    return userRepository.findByUserName(userName);
  // }
 

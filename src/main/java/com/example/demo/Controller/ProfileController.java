@@ -37,7 +37,7 @@ public class ProfileController {
 	}
 	@GetMapping("/profile/{id}")
 	String profilePage(Model model, @PathVariable Long id) {
-		User user = userService.findById(id);
+		User user = (User) userService.findById(id);
 		model.addAttribute("user", user);
 		return "profile";
 	}
@@ -45,7 +45,7 @@ public class ProfileController {
 	@GetMapping("/addProfile")
 	public String createProfile(Model model, @PathVariable Long id) {
 
-		User userId = userService.findById(id);
+		User userId = (User) userService.findById(id);
 		Profile profile = new Profile();
 		profile.setUser(userId);
 		model.addAttribute("user", userId);
@@ -55,20 +55,20 @@ public class ProfileController {
 
 	@PostMapping("/saveProfile")
 	public String saveProfile(@ModelAttribute Profile profile,@RequestParam Long user) {
-		User userId = userService.findById(user);
-		profileService.addProfile(profile);
+		User userId = (User) userService.findById(user);
+		profileService.save(profile);
 		return "redirect:/user/profile/" + userId.getId();
 	}
 	@GetMapping("/editProfile")
 	public String editProfile(@RequestParam Long id,Model model){
-		User user = userService.findById(id);
+		User user = (User) userService.findById(id);
 	    model.addAttribute("user",user);
 		return "editProfile";
 	}
 
 	@GetMapping("/deleteProfile/{id}")
 	public String deleteMeal(@PathVariable Long id){
-		Profile profile = profileService.findById(id);
+		Profile profile = (Profile) profileService.findById(id);
 		profileService.deleteById(id); //Raderar profil
 		return "redirect:/user/editProfile?id=" + profile.getUser().getId();//Skickar tillbaka till /mealList
 	}

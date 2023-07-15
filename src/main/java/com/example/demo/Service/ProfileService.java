@@ -6,6 +6,7 @@ import com.example.demo.Entities.User;
 import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProfileService {
+public class ProfileService extends BaseService{
 	public static final String YES = "yes";
 	public static boolean isChoiceDone = false;
 
@@ -61,33 +62,18 @@ public class ProfileService {
 
 
 	}
-	public void resultAfterLastChoice(){
-
-	}
-
-    public Profile addProfile(Profile profile){
-        return profileRepository.save(profile);
-    }
-
-    public Profile findById(Long id){
-        return profileRepository.findById(id)
-				.orElseThrow(() -> new RecordNotFoundException("Profile not found"));
-    }
-
-	public Profile deleteById(Long id){
-			Profile profile = profileRepository.findById(id)
-				.orElseThrow(() -> new RecordNotFoundException("Profile not found"));
-			profileRepository.delete(profile);
-			return profile;
-		}
-
 	public Profile getProfileFromSession(Long id, HttpSession session) {
 		Profile profile = (Profile) session.getAttribute("profile");
 		if (profile == null || profile.getId() != id) { //Kollar om gamla profilen är kvar
-			profile = findById(id);
+			profile = (Profile) findById(id);
 			session.setAttribute("profile", profile);
 		}
 		return profile;
+	}
+
+	@Override
+	protected CrudRepository<Profile,Long> getRepository() {
+		return profileRepository;
 	}
 }
 

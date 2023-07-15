@@ -6,6 +6,7 @@ import com.example.demo.Entities.User;
 import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,41 +14,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MealService {
+public class MealService extends BaseService{
     @Autowired
     private MealRepository mealRepository;
-	public Meal findById(Long id){
-		return mealRepository.findById(id)
-				.orElseThrow(() -> new RecordNotFoundException("Meal not found "));
-	}
-
 //    public Meal findById(Long id){
 //        return mealRepository.findById(id).get();
 //    }
-
-
-	public List<Meal> findAll() {
-		List<Meal> mealList = (List<Meal>) mealRepository.findAll();
-		return mealList;
-	}
-
-	public Meal addMeal(Meal meal){
-		return mealRepository.save(meal);
-	}
-
-	public List<Meal> findByUser(User user) {
-		return mealRepository.findByUser(user);
-	}
-
-	public Meal deleteById(Long id) {
-		Meal meal = mealRepository.findById(id)
-				.orElseThrow(() -> new RecordNotFoundException("Meal not found"));
-		mealRepository.delete(meal);
-		return meal;
-	}
-
 	public List<Meal> getMealsByUserId(Long userId){
 		return mealRepository.findByUserId(userId);
 	}
 
+	@Override
+	protected CrudRepository<Meal,Long> getRepository() {
+		return mealRepository;
+	}
 }
