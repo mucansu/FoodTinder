@@ -3,9 +3,11 @@ package com.example.demo.Controller;
 import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
-import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.MealRepository;
 import com.example.demo.Repository.UserRepository;
+import com.example.demo.Service.Interfaces.IMealService;
+import com.example.demo.Service.Interfaces.IProfileService;
+import com.example.demo.Service.Interfaces.IUserService;
 import com.example.demo.Service.MealService;
 import com.example.demo.Service.ProfileService;
 import com.example.demo.Service.UserService;
@@ -25,12 +27,20 @@ public class MealController {
 	private final MealService mealService;
 	private final ProfileService profileService;
 	private final UserService userService;
+	private final IProfileService iProfileService;
+	private final IMealService iMealService;
+	private final IUserService iUserService;
+
 	@Autowired
-	public MealController(MealService mealService, ProfileService profileService, UserService userService){
+	public MealController(MealService mealService, ProfileService profileService, UserService userService, IProfileService iProfileService, IMealService iMealService, IUserService iUserService){
 		this.mealService = mealService;
 		this.profileService = profileService;
 		this.userService = userService;
+		this.iProfileService = iProfileService;
+		this.iMealService = iMealService;
+		this.iUserService = iUserService;
 	}
+
 
 	@Autowired
 	private MealRepository mealRepository;
@@ -161,5 +171,17 @@ public class MealController {
 		Meal meal = (Meal) mealService.findById(id);
 					mealService.deleteById(id);
 		return "redirect:/mealList?id=" + meal.getUser().getId();
+	}
+
+	public IProfileService getiProfileService() {
+		return iProfileService;
+	}
+
+	public IMealService getiMealService() {
+		return iMealService;
+	}
+
+	public IUserService getiUserService() {
+		return iUserService;
 	}
 }

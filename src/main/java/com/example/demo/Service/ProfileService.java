@@ -5,6 +5,7 @@ import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
 import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.ProfileRepository;
+import com.example.demo.Service.Interfaces.IProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProfileService extends BaseService{
+public class ProfileService extends BaseService implements IProfileService {
 	public static final String YES = "yes";
 	public static boolean isChoiceDone = false;
 
