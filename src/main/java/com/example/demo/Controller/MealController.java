@@ -37,50 +37,17 @@ public class MealController {
 	@Autowired
 	private UserRepository userRepository;
 
-
+	public static final String DEFAULT = "default";
 
 	@GetMapping("/main/{id}")
 	public String mainPage(Model model, @PathVariable Long id,
 	                       @RequestParam(required = false, defaultValue = "0") Integer index,
-	                       @RequestParam(required = false, defaultValue = "default") String choice,
+	                       @RequestParam(required = false, defaultValue = DEFAULT) String choice,
 	                       HttpSession session) {
-
-		//Kollar vilken profil som är inloggad
-		Profile profile = profileService.getProfileFromSession(id, session);
-
-		//Hämtar alla måltider som är kopplade till användaren som är inloggad.
-		List<Meal> mealList = mealService.getMealsByUserId(profile.getUser().getId());
-
-		//När mealList.size är nådd ska resultat visas och profiler som har valt sina YES meals sparas i profileList.
-		if (index >= mealList.size()) {
-
-			if (choice.equals("yes")) { //Om sista måltiden är choice "yes".
-				Meal lastmeal = mealList.get(index - 1); //Skapa en lastmeal och sätt den till föregående index.
-				profile.getSessionMealList().add(lastmeal); //Addera den till SessionMealList.
-			}
-
-			List<Profile> profileList = (List<Profile>) session.getAttribute("profileList");
-			if (profileList == null) {
-				profileList = new ArrayList<>();
-				session.setAttribute("profileList", profileList);
-			}
-			profileList.add(profile);
-			model.addAttribute("yesMealList", profile.getSessionMealList()); //Adding the yesMealList to the controller.
-			model.addAttribute("profileList", profileList);//Add the profileList to the model.
+		if (ProfileService.isChoiceDone){
 			return "result";
 		}
-
-		Meal meal = mealList.get(index);//Hämtar index på måltid
-
-		model.addAttribute("mealList", mealList);
-		model.addAttribute("meal", meal);
-		model.addAttribute("mealIndex", index + 1);//Tar nästa måltid
-
-		if (choice.equals("yes")) {
-			Meal addmeal = mealList.get(index - 1);//Hämtar indexet för måltiden som visades
-			profile.getSessionMealList().add(addmeal);//Om choice yes läggs måltiden i listan i profiles matlistan
-		}
-
+		profileService.findProfileAndMealLists(model, id, index, choice, session);
 		return "main";
 	}
 
@@ -173,40 +140,26 @@ public class MealController {
 
 	@GetMapping("/editMeal/{id}")
 	public String editMeal(Model model, @PathVariable Long id){
-		Optional<Meal> optionalMeal = mealService.findById(id);
-		optionalMeal.ifPresent(model::addAttribute);
-			return "editMealForm";
-		//handle error when meal not found
+		Meal meal = mealService.findById(id);
+
+		model.addAttribute("meal", meal);
+		return "editMealForm";
 	}
 
 	@PostMapping("/saveEditedMeal")
 	public String saveEditedMeal(@RequestParam String mealName, @RequestParam Long id){
-		Optional<Meal> optionalMeal = Optional.ofNullable(mealService.findById(id).orElseThrow(() -> new RecordNotFoundException("Meal not found for name: " + mealName)));
+		Meal meal = mealService.findById(id);
 
-		if(!optionalMeal.isPresent()) {
-			// Handle the case where the meal is not found.
-			throw new RecordNotFoundException("No meal found with name: " + mealName);
-		}
-
-		Meal meal = optionalMeal.get();
 		meal.setMealName(mealName);
 		mealService.addMeal(meal);
-
 		return "redirect:/mealList?id=" + meal.getUser().getId();
 	}
 
 
 	@GetMapping("/deleteMeal/{id}")
 	public String deleteMeal(@PathVariable Long id){
-		Optional<Meal> meal2 = mealService.findById(id);
-		if(!meal2.isPresent()) {
-			// Handle the case where the meal is not found.
-			// This could be a redirect to an error page, or logging and returning a default page.
-			return "redirect:/error";
-		}
-
-		Meal meal = meal2.get();
-		mealService.deleteById(id); //Raderar meal
-		return "redirect:/mealList?id=" + meal.getUser().getId();//Skickar tillbaka till /mealList
+		Meal meal = mealService.findById(id);
+					mealService.deleteById(id);
+		return "redirect:/mealList?id=" + meal.getUser().getId();
 	}
 }

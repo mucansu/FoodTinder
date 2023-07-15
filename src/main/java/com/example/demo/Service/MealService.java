@@ -3,6 +3,7 @@ package com.example.demo.Service;
 import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
 import com.example.demo.Entities.User;
+import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,9 @@ import java.util.Optional;
 public class MealService {
     @Autowired
     private MealRepository mealRepository;
-	public Optional<Meal> findById(Long id){
-		return mealRepository.findById(id);
+	public Meal findById(Long id){
+		return mealRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Meal not found "));
 	}
 
 //    public Meal findById(Long id){
@@ -38,10 +40,9 @@ public class MealService {
 	}
 
 	public Meal deleteById(Long id) {
-		Meal meal = mealRepository.findById(id).orElse(null);
-		if (meal != null) {
-			mealRepository.delete(meal);
-		}
+		Meal meal = mealRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Meal not found"));
+		mealRepository.delete(meal);
 		return meal;
 	}
 

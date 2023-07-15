@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entities.User;
+import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,9 +15,10 @@ public class UserService {
       return userRepository.save(user);
     }
 
-   public User findById(Long id){
-        return userRepository.findById(id).get();
-   }
+    public User findById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("User not found"));
+    }
 
    public User findUserName(String userName){
         return userRepository.findByUserName(userName);
