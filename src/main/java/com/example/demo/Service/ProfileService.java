@@ -24,43 +24,53 @@ public class ProfileService extends BaseService{
 	@Autowired
 	private MealService mealService;
 	public void findProfileAndMealLists(Model model, Long id, Integer index, String choice, HttpSession session){
-		//Kollar vilken profil som är inloggad
+		// Fetch profile from session and meals related to the user
 		Profile profile = getProfileFromSession(id, session);
-
-		//Hämtar alla måltider som är kopplade till användaren som är inloggad.
 		List<Meal> mealList = mealService.getMealsByUserId(profile.getUser().getId());
 
-		//När mealList.size är nådd ska resultat visas och profiler som har valt sina YES meals sparas i profileList.
+		// Handle profile choice
+		handleProfileChoice(index, choice, profile, mealList, session);
+
+		// Update model attributes
+		updateModelAttributes(index, choice, profile, mealList, model, session);
+	}
+
+	private void handleProfileChoice(Integer index, String choice, Profile profile, List<Meal> mealList, HttpSession session) {
 		if (index >= mealList.size()) {
-
-			if (choice.equals(YES)) { //Om sista måltiden är choice "yes".
-				Meal lastmeal = mealList.get(index - 1); //Skapa en lastmeal och sätt den till föregående index.
-				profile.getSessionMealList().add(lastmeal); //Addera den till SessionMealList.
+			if (choice.equals(YES)) {
+				Meal lastmeal = mealList.get(index - 1);
+				profile.getSessionMealList().add(lastmeal);
 			}
 
-			List<Profile> profileList = (List<Profile>) session.getAttribute("profileList");
-			if (profileList == null) {
-				profileList = new ArrayList<>();
-				session.setAttribute("profileList", profileList);
-			}
-			profileList.add(profile);
-			model.addAttribute("yesMealList", profile.getSessionMealList()); //Adding the yesMealList to the controller.
-			model.addAttribute("profileList", profileList);//Add the profileList to the model.
+			saveProfileToSession(profile, session);
 			isChoiceDone = true;
 		}
 
-		Meal meal = mealList.get(index);//Hämtar index på måltid
+		if (choice.equals(YES)) {
+			Meal addmeal = mealList.get(index - 1);
+			profile.getSessionMealList().add(addmeal);
+		}
+	}
 
+	private void saveProfileToSession(Profile profile, HttpSession session) {
+		List<Profile> profileList = (List<Profile>) session.getAttribute("profileList");
+		if (profileList == null) {
+			profileList = new ArrayList<>();
+			session.setAttribute("profileList", profileList);
+		}
+		profileList.add(profile);
+	}
+
+	private void updateModelAttributes(Integer index, String choice, Profile profile, List<Meal> mealList, Model model, HttpSession session) {
+		Meal meal = mealList.get(index);
 		model.addAttribute("mealList", mealList);
 		model.addAttribute("meal", meal);
-		model.addAttribute("mealIndex", index + 1);//Tar nästa måltid
+		model.addAttribute("mealIndex", index + 1);
 
-		if (choice.equals(YES)) {
-			Meal addmeal = mealList.get(index - 1);//Hämtar indexet för måltiden som visades
-			profile.getSessionMealList().add(addmeal);//Om choice yes läggs måltiden i listan i profiles matlistan
+		if (isChoiceDone) {
+			model.addAttribute("yesMealList", profile.getSessionMealList());
+			model.addAttribute("profileList", session.getAttribute("profileList"));
 		}
-
-
 	}
 	public Profile getProfileFromSession(Long id, HttpSession session) {
 		Profile profile = (Profile) session.getAttribute("profile");
