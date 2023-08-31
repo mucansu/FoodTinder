@@ -67,6 +67,9 @@ public class MealController {
 	public String matchingMeals(Model model, HttpSession session) {
 		//Profile currentProfile = (Profile) session.getAttribute("profile"); //Gets current profile from session
 		List<Profile> profileList = (List<Profile>) session.getAttribute("profileList");// Gets List of Profiles in the session
+		if (profileList == null){
+			profileList = new ArrayList<>();
+		}
 		List<Meal> matchingMeals = new ArrayList<>(); //Empty List to add the matchingMeals to
 
 		Map<Long, Integer> matchedMeals = new HashMap<>(); //Creates a HashMap
@@ -127,7 +130,7 @@ public class MealController {
 	//Visar sidan med mealList
 	@GetMapping("/mealList")
 	public String addMealList(Model model, @RequestParam(required = false) Long id){
-		User user = (User) userService.findById(id);
+		User user = userService.findById(id);
 		model.addAttribute("user", user);
 		return "mealList";
 	}
@@ -135,7 +138,7 @@ public class MealController {
 	//Sätter ihop user och meal objekt med varandra och skickar med modellen.
 	@GetMapping("/addMeal/{id}")
 	public String add(Model model, @PathVariable Long id){
-		User user = (User) userService.findById(id); //Hittar user med hjälp av id.
+		User user = userService.findById(id); //Hittar user med hjälp av id.
 		Meal meal = new Meal(); //Skapa ett nytt meal objekt
 		meal.setUser(user); // Sätter ihop meal med user.
 		model.addAttribute("meal", meal);//Skicka meal till thymeleaf
