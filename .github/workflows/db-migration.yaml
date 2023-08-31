@@ -19,9 +19,14 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+    - name: Setup Java and Maven
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
 
     - name: Run Database Migrations
-      run: ./mvnw flyway:migrate
+      run: mvn flyway:migrate
       env:
         FLYWAY_URL: jdbc:mysql://mysql:3306/your_db
         FLYWAY_USER: root
@@ -29,5 +34,6 @@ jobs:
 
     - name: Login to Docker Hub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
     - name: Push Custom MySQL Image
       run: docker push mucansu/foodtinder_db:latest
