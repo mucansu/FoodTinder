@@ -19,11 +19,9 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-    # ... (other steps for checkout, setup JDK, cache, build, etc.)
 
     - name: Run Database Migrations
       run: ./mvnw flyway:migrate
-      working-directory: C:\Users\Turkuaz\Desktop\Git\FoodTinder
       env:
         FLYWAY_URL: jdbc:mysql://mysql:3306/your_db
         FLYWAY_USER: root
