@@ -29,7 +29,6 @@ public class MealService {
 	public Meal addMeal(Meal meal){
 		return mealRepository.save(meal);
 	}
-
 	public List<Meal> findByUser(User user) {
 		return mealRepository.findByUser(user);
 	}
