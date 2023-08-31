@@ -23,6 +23,7 @@ jobs:
 
     - name: Run Database Migrations
       run: ./mvnw flyway:migrate
+      working-directory: C:\Users\Turkuaz\Desktop\Git\FoodTinder
       env:
         FLYWAY_URL: jdbc:mysql://mysql:3306/your_db
         FLYWAY_USER: root
