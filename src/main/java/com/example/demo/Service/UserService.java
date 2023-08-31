@@ -30,9 +30,7 @@ public class UserService {
       //  return userRepository.findByPassword(password);
 
    }
-   /* public User getUsernamePassword(String userName,String password){
-        return userRepository.findByUserNameAndPassword(userName,password);
-    }*/
+
 
 
 
