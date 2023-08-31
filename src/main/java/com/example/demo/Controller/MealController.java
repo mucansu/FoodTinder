@@ -74,11 +74,8 @@ public class MealController {
 			Meal addmeal = mealList.get(index - 1);//Hämtar indexet för måltiden som visades
 			profile.getSessionMealList().add(addmeal);//Om choice yes läggs måltiden i listan i profiles matlistan
 		}
-
 		return "main";
 	}
-
-
 	@GetMapping("/matchingMeals")
 	public String matchingMeals(Model model, HttpSession session) {
 		//Profile currentProfile = (Profile) session.getAttribute("profile"); //Gets current profile from session
