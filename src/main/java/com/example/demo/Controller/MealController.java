@@ -11,6 +11,7 @@ import com.example.demo.Service.Interfaces.IUserService;
 import com.example.demo.Service.MealService;
 import com.example.demo.Service.ProfileService;
 import com.example.demo.Service.UserService;
+import com.example.demo.Utilites.OptionalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -93,7 +94,7 @@ public class MealController {
 				}
 			}
 
-			if (matchedMealsIds.size() == 0)
+			if (matchedMealsIds.isEmpty())
 				for (Map.Entry<Long, Integer> entry : matchedMeals.entrySet()) { //Iterates over the entries of the map "matchedMeals".
 					if (entry.getValue() == profileList.size() - i) { //If the value of the entry equals to the size of "profileList" minus i.
 						matchedMealsIds.add(entry.getKey()); //it also adds the key to the "matchedMealsIds" list.
@@ -150,16 +151,14 @@ public class MealController {
 
 	@GetMapping("/editMeal/{id}")
 	public String editMeal(Model model, @PathVariable Long id){
-		Meal meal = (Meal) mealService.findById(id);
-
+		Meal meal = mealService.findById(id);
 		model.addAttribute("meal", meal);
 		return "editMealForm";
 	}
 
 	@PostMapping("/saveEditedMeal")
 	public String saveEditedMeal(@RequestParam String mealName, @RequestParam Long id){
-		Meal meal = (Meal) mealService.findById(id);
-
+		Meal meal = mealService.findById(id);
 		meal.setMealName(mealName);
 		mealService.save(meal);
 		return "redirect:/mealList?id=" + meal.getUser().getId();
@@ -168,7 +167,7 @@ public class MealController {
 
 	@GetMapping("/deleteMeal/{id}")
 	public String deleteMeal(@PathVariable Long id){
-		Meal meal = (Meal) mealService.findById(id);
+		Meal meal = mealService.findById(id);
 					mealService.deleteById(id);
 		return "redirect:/mealList?id=" + meal.getUser().getId();
 	}

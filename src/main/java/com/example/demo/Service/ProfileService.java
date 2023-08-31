@@ -2,7 +2,6 @@ package com.example.demo.Service;
 
 import com.example.demo.Entities.Meal;
 import com.example.demo.Entities.Profile;
-import com.example.demo.Entities.User;
 import com.example.demo.Exceptions.RecordNotFoundException;
 import com.example.demo.Repository.ProfileRepository;
 import com.example.demo.Service.Interfaces.IProfileService;
@@ -14,9 +13,10 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ProfileService extends BaseService implements IProfileService {
+public class ProfileService extends BaseService <Profile,Long> implements IProfileService {
 	public static final String YES = "yes";
 	public static boolean isChoiceDone = false;
 
@@ -34,6 +34,11 @@ public class ProfileService extends BaseService implements IProfileService {
 
 		// Update model attributes
 		updateModelAttributes(index, choice, profile, mealList, model, session);
+	}
+
+	@Override
+	public Profile addProfile(Profile profile) {
+		return profileRepository.save(profile);
 	}
 
 	private void handleProfileChoice(Integer index, String choice, Profile profile, List<Meal> mealList, HttpSession session) {
@@ -85,6 +90,12 @@ public class ProfileService extends BaseService implements IProfileService {
 	@Override
 	protected CrudRepository<Profile,Long> getRepository() {
 		return profileRepository;
+	}
+
+	@Override
+	public void add(Object o) {
+		Profile profile = (Profile) o;
+		profileRepository.save(profile);
 	}
 }
 

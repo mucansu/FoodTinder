@@ -9,6 +9,6 @@ public interface IProfileService extends IBaseService{
     void findProfileAndMealLists(Model model, Long id, Integer index, String choice, HttpSession session);
     Profile addProfile(Profile profile);
     Profile findById(Long id);
-    Profile deleteById(Long id);
+    void deleteById(Long id);
     Profile getProfileFromSession(Long id, HttpSession session);
 }
