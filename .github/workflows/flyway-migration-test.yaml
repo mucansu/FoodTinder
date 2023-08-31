@@ -1,0 +1,36 @@
+# This workflow uses Flyway Hub to test the Flyway database migrations in the 'src/main/resources/db/migration' path(s).
+#
+# The workflow will run automatically against all pull requests that modify files under 'src/main/resources/db/migration'.
+#
+# It will also run on all pushes to 'master' that modify files under 'src/main/resources/db/migration'.
+#
+# In order to use this workflow you will need to create a Github Actions secret called
+# FLYWAY_HUB_ACCESS_TOKEN containing a valid Flyway Hub API access token.
+#
+name: Database Migration Tests with Flyway
+
+on:
+  push:
+    branches:
+    - 'master'
+    paths:
+      - 'src/main/resources/db/migration/**'
+  pull_request:
+    paths:
+    - 'src/main/resources/db/migration/**'
+  workflow_dispatch: {}
+
+jobs:
+  test-migrations:
+    name: Test flyway migration scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout/@v2
+      - name: Test migrations on Flyway Hub
+        uses: red-gate/flyway-hub-migration-test@v4
+        with:
+          projectName: foodtinder
+          engine: mysql-8
+          migrationDirs: src/main/resources/db/migration  
+env:
+  FLYWAYHUB_ACCESS_TOKEN: ${{ secrets.FLYWAY_HUB_ACCESS_TOKEN }}
