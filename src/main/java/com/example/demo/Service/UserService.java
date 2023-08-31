@@ -9,26 +9,18 @@ import org.springframework.stereotype.Service;
 public class UserService {
     //public UserDetailsService getUsernamePassword;
     @Autowired
-   private UserRepository userRepository;
-    public User addUser(User user){
-      return userRepository.save(user);
+    private UserRepository userRepository;
+
+    public User addUser(User user) {
+        return userRepository.save(user);
     }
 
-   public User findById(Long id){
+    public User findById(Long id) {
         return userRepository.findById(id).get();
-   }
+    }
 
-   public User findUserName(String userName){
+    public User findUserName(String userName) {
         return userRepository.findByUserName(userName);
-   }
-
- // public User findByUsername(String userName){
-   //    return userRepository.findByUserName(userName);
- // }
-   }
-   /* public User getUsernamePassword(String userName,String password){
-        return userRepository.findByUserNameAndPassword(userName,password);
-    }*/
-
-
+    }
+}
 
